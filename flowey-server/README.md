@@ -8,7 +8,7 @@ conda create -n flowey python=3
 ```
 Then install the required packages:
 ```bash
-pip install -r requirement
+pip install -r requirements.txt
 ```
 
 ## TODOS
