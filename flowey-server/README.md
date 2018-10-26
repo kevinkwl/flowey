@@ -11,6 +11,11 @@ Then install the required packages:
 pip install -r requirements.txt
 ```
 
+## Run
+```bash
+export FLASK_APP=flasky.py
+flask run
+```
 ## TODOS
 
 ### Register, Login, Authentication
