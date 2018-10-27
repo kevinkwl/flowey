@@ -1,15 +1,17 @@
-from flask_restplus import Namespace, Resource
-from flask_restplus import reqparse
+from flask_restplus import Namespace, Resource, reqparse
 from flowey.models import User
 from flowey.ext import db
+from flask_jwt_extended import create_access_token
+from werkzeug.security import safe_str_cmp
 
 api = Namespace('auth', description='authentication APIs')
 
-@api.route('/')
+
+@api.route('/register')
 class Register(Resource):
     @api.doc('test api hello')
-
     def post(self):
+        print("!!!!!!!!")
         parser = reqparse.RequestParser()
         parser.add_argument('username', type=str, help='name to create user')
         parser.add_argument('password', type=str, help='password to create user')
@@ -25,9 +27,44 @@ class Register(Resource):
 
         return "Post"
 
-
     def get(self):
         all_users = User.query.all()
         return all_users
+
+
+@api.route('/login')
+class Login(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('username',
+                        type=str,
+                        required=True,
+                        help="This field cannot be blank."
+                        )
+    parser.add_argument('password',
+                        type=str,
+                        required=True,
+                        help="This field cannot be blank."
+                        )
+
+    @api.doc('Test login')
+    def post(self):
+        data = self.parser.parse_args()
+        # read from database to find the user and then check the password
+        user = User.query.filter_by(username=data['username']).first()
+
+        if user and safe_str_cmp(user.password, data['password']):
+            # when authenticated, return a fresh access token and a refresh token
+            access_token = create_access_token(identity=user.id, fresh=True)
+            # refresh_token = create_refresh_token(user.id)
+            return {
+                       'jwt_token': access_token,
+                       "user": {
+                           "id": user.id,
+                           "email": user.email,
+                           "username": user.username,
+                       }
+                   }, 200
+
+        return {"message": "Invalid Credentials!"}, 401
 
 
