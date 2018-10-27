@@ -8,6 +8,7 @@ from flask import jsonify
 api = Namespace('auth', description='authentication APIs')
 
 
+@api.route('/register')
 class Register(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('username', type=str, required=True, help='name to create user')
