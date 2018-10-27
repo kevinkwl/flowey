@@ -14,8 +14,12 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'mysql:///' + os.path.join(basedir, 'data-dev.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'flowey.db')
+
+    #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://flowey:flowey@localhost/flowey_db'
+
+    #SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+    #    'mysql:///' + os.path.join(basedir, 'data-dev.db')
 
 
 class TestingConfig(Config):
