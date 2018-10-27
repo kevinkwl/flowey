@@ -30,7 +30,7 @@ class Register(Resource):
 @api.route('/login')
 class Login(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('username',
+    parser.add_argument('email',
                         type=str,
                         required=True,
                         help="This field cannot be blank."
@@ -45,7 +45,7 @@ class Login(Resource):
     def post(self):
         data = self.parser.parse_args()
         # read from database to find the user and then check the password
-        user = User.query.filter_by(username=data['username']).first()
+        user = User.query.filter_by(username=data['email']).first()
 
         if user and safe_str_cmp(user.password, data['password']):
             # when authenticated, return a fresh access token and a refresh token
