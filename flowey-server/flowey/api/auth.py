@@ -11,7 +11,6 @@ api = Namespace('auth', description='authentication APIs')
 class Register(Resource):
     @api.doc('test api hello')
     def post(self):
-        print("!!!!!!!!")
         parser = reqparse.RequestParser()
         parser.add_argument('username', type=str, help='name to create user')
         parser.add_argument('password', type=str, help='password to create user')
@@ -26,10 +25,6 @@ class Register(Resource):
         print(User.query.all()) # list type
 
         return "Post"
-
-    def get(self):
-        all_users = User.query.all()
-        return all_users
 
 
 @api.route('/login')
