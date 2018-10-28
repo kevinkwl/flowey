@@ -15,6 +15,20 @@ class User(db.Model):
         self.email = email
 
     def __repr__(self):
-        #return '<User %r>' % self.username
+        # return '<User %r>' % self.username
         return "id:{} username:{} password:{} email:{}".format(self.id, self.username, self.password, self.email)
 
+
+class TokenBlackList(db.Model):
+    pass
+    __tablename__ = 'tokenblacklist'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    jti = db.Column(db.String(36), nullable=False)
+    revoked = db.Column(db.Boolean, nullable=False)
+
+    def __init__(self, jti):
+        self.jti = jti
+        self.revoked = True
+
+    def __repr__(self):
+        return "id:{} jti:{} revoked:{}".format(self.id, self.jti, self.revoked)

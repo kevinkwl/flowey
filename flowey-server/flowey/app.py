@@ -14,5 +14,5 @@ def create_app(config_name):
 
 def register_extensions(app):
     db.init_app(app)
-    api.init_app(app)
     jwt.init_app(app)
+    api.init_app(app)
