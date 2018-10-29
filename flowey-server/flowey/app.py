@@ -16,3 +16,5 @@ def register_extensions(app):
     db.init_app(app)
     jwt.init_app(app)
     api.init_app(app)
+	# fix jwt exception
+    jwt._set_error_handler_callbacks(api)
