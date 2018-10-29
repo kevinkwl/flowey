@@ -19,9 +19,9 @@ class Transactions_all(Resource):
                         help='transaction currency')
     parser.add_argument('category', type=int, required=True,
                         help='transaction category')
-    parser.add_argument('date', type=datetime.date, required=True,
+    parser.add_argument('date', type=str, required=True,
                         help='transaction date')
-    parser.add_argument('last_modified', type=datetime.datetime, required=True,
+    parser.add_argument('last_modified', type=str, required=True,
                         help='transaction last modified date and time')
     parser.add_argument('user_id', type=int, required=True,
                         help='transaction user id')
@@ -32,18 +32,25 @@ class Transactions_all(Resource):
         data = Transaction.query.filter_by(user_id=user_id).all()
         return jsonify(data), 200
 
-    @jwt_required
+    #@jwt_required
     def post(self):
+        print("post start!!!")
         args = self.parser.parse_args()
+
         try:
-            new_transaction = Transaction(
-                args['amount'], args['currency'], args['category'], args['date'], args['last_modified'], args['user_id'])
+            _date = datetime.date(*map(int, args['date'].split('-')))
+            _datetime = datetime.datetime.strptime(args['last_modified'], '%Y-%m-%d %H:%M:%S')
+
+            new_transaction = Transaction(args['amount'], args['currency'], args['category'],
+                                                            _date, _datetime, args['user_id'])
             db.session.add(new_transaction)
             db.session.commit()
+
         except Exception as e:
             return {"message": "Got error {!r}".format(e)}, 403
         else:
             return {"message": "Transaction creation succeeded"}, 200
+
 
 
 @api.route('/<transaction_id>')
@@ -56,9 +63,9 @@ class Transaction_single(Resource):
                         help='transaction currency')
     parser.add_argument('category', type=int, required=True,
                         help='transaction category')
-    parser.add_argument('date', type=datetime.date, required=True,
+    parser.add_argument('date', type=str, required=True,
                         help='transaction date')
-    parser.add_argument('last_modified', type=datetime.datetime, required=True,
+    parser.add_argument('last_modified', type=str, required=True,
                         help='transaction last modified date and time')
     parser.add_argument('user_id', type=int, required=True,
                         help='transaction user id')
