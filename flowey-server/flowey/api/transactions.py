@@ -10,7 +10,7 @@ api = Namespace('transactions', description='transactions APIs')
 
 
 @api.route('/')
-class Transactions_all(Resource):
+class AllTransactions(Resource):
 
     parser = reqparse.RequestParser()
     parser.add_argument('amount', type=int, required=True,
@@ -56,7 +56,7 @@ class Transactions_all(Resource):
 
 # ! BUG HERE
 @api.route('/<int:transaction_id>')
-class Transaction_single(Resource):
+class SingleTransaction(Resource):
 
     parser = reqparse.RequestParser()
     parser.add_argument('amount', type=int, required=True,
