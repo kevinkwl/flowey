@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  SettingViewController.swift
 //  flowey
 //
 //  Created by Kangwei Ling on 2018/10/25.
@@ -8,23 +8,18 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class SettingViewController: UIViewController {
 
-    @IBOutlet weak var emailTextF: UITextField!
-    @IBOutlet weak var pwdTextF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func Register(_ sender: UIButton) {
-        performSegue(withIdentifier: "goRegister", sender: self)
-    }
-    
-    @IBAction func Login(_ sender: UIButton) {
-        UserDefaults.standard.set(true, forKey: Constant.hasLoginKey)
-        print(UserDefaults.standard.bool(forKey: Constant.hasLoginKey))
+
+    @IBAction func logout(_ sender: UIButton) {
+        UserDefaults.standard.set(false, forKey: Constants.hasLoginKey)
+        performSegue(withIdentifier: "logout", sender: self)
     }
     /*
     // MARK: - Navigation
