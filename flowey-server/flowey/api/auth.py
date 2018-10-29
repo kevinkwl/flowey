@@ -82,9 +82,11 @@ class Logout(Resource):
 
 @api.route('/show')
 class Show(Resource):
-    @jwt_required
+    # @jwt_required
     def get(self):
-        data = User.query.all()
-        result = [{'username': x.username, 'password': x.password,
-                   'email': x.email} for x in data]
-        return jsonify(result)
+        # data = User.query.all()
+        # result = [{'username': x.username, 'password': x.password,
+        #            'email': x.email} for x in data]
+        data = [d._asdict() for d in User.query.all()]
+        print(data)
+        return data

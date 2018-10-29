@@ -36,7 +36,8 @@ class Transactions_all(Resource):
     def post(self):
         args = self.parser.parse_args()
         try:
-            new_transaction = Transaction()
+            new_transaction = Transaction(
+                args['amount'], args['currency'], args['category'], args['date'], args['last_modified'], args['user_id'])
             db.session.add(new_transaction)
             db.session.commit()
         except Exception as e:
@@ -101,7 +102,7 @@ class Transaction_single(Resource):
 
 @api.route('/show')
 class Show(Resource):
-    @jwt_required
+    # @jwt_required
     def get(self):
-        data = Transaction.query.all()
+        data = [d.__dict__ for d in Transaction.query.all()]
         return jsonify(data), 200
