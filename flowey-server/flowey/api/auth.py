@@ -5,7 +5,6 @@ from flask_jwt_extended import (create_access_token, create_refresh_token, get_j
                                 get_raw_jwt, jwt_required, jwt_refresh_token_required)
 from werkzeug.security import safe_str_cmp
 from flask import jsonify
-from sqlalchemy.orm.exc import NoResultFound
 
 api = Namespace('auth', description='authentication APIs')
 
@@ -31,7 +30,7 @@ class Register(Resource):
             db.session.add(new_user)
             db.session.commit()  # This is needed to write the changes to database
             # print(User.query.all()) # list type
-            return {"message": "Register Success!"}, 500
+            return {"message": "Register Success!"}, 200
 
 
 @api.route('/login')
@@ -79,7 +78,6 @@ class Logout(Resource):
         db.session.add(revoked_token)
         db.session.commit()
         return {"msg": "Successfully logged out"}, 200
-        # return jsonify(msg="Successfully logged out"), 200
 
 
 @api.route('/show')
@@ -90,13 +88,3 @@ class Show(Resource):
         result = [{'username': x.username, 'password': x.password,
                    'email': x.email} for x in data]
         return jsonify(result)
-
-
-@jwt.token_in_blacklist_loader
-def check_if_token_revoked(decoded_token):
-    jti = decoded_token['jti']
-    try:
-        token = TokenBlackList.query.filter_by(jti=jti).one()
-        return token.revoked
-    except NoResultFound:
-        return False
