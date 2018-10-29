@@ -6,7 +6,7 @@ python:
 install:
   - pip install -r flowey-server/requirements.txt
 
-before-script:
+before_script:
   - cd flowey-server
 script:
-  - FLASK_APP=flasky.py flask test
+  - FLASK_APP=flasky.py flask testa
