@@ -54,47 +54,47 @@ class AllTransactions(Resource):
             return {"message": "Transaction creation succeeded"}, 200
 
 
-# ! BUG HERE
 @api.route('/<int:transaction_id>')
 class SingleTransaction(Resource):
 
     parser = reqparse.RequestParser()
-    parser.add_argument('amount', type=int, required=True,
+    parser.add_argument('amount', type=int, required=False,
                         help='transaction amount')
-    parser.add_argument('currency', type=str, required=True,
+    parser.add_argument('currency', type=str, required=False,
                         help='transaction currency')
-    parser.add_argument('category', type=int, required=True,
+    parser.add_argument('category', type=int, required=False,
                         help='transaction category')
-    parser.add_argument('date', type=str, required=True,
+    parser.add_argument('date', type=str, required=False,
                         help='transaction date')
-    parser.add_argument('last_modified', type=str, required=True,
+    parser.add_argument('last_modified', type=str, required=False,
                         help='transaction last modified date and time')
 
-    def __init__(self, transaction_id):
-        print(transaction_id)
-        self.data = Transaction.query.filter_by(
-            transaction_id=int(transaction_id)).one()
-
-    # @jwt_required
-    def get(self):
-        if self.data:
-            data = self.data.as_dict()
+    @jwt_required
+    def get(self, transaction_id):
+        data = Transaction.query.filter_by(
+            transaction_id=transaction_id).one()
+        if data:
+            data = data.as_dict()
             return data, 200
         else:
             return {"message": "Transaction not found"}, 404
 
-    # @jwt_required
-    def delete(self):
-        if self.data:
-            db.session.delete(self.data)
+    @jwt_required
+    def delete(self, transaction_id):
+        data = Transaction.query.filter_by(
+            transaction_id=transaction_id).one()
+        if data:
+            db.session.delete(data)
             db.session.commit()
             return {"message": "Transaction deletion succeeded"}, 200
         else:
             return {"message": "Transaction not found"}, 404
 
-    # @jwt_required
-    def put(self):
-        if self.data:
+    @jwt_required
+    def put(self, transaction_id):
+        data = Transaction.query.filter_by(
+            transaction_id=transaction_id).one()
+        if data:
             args = self.parser.parse_args()
             if args['date'] is not None:
                 args['date'] = datetime.date(
@@ -105,7 +105,7 @@ class SingleTransaction(Resource):
             try:
                 for key, value in args.items():
                     if value is not None:
-                        setattr(self.data, key, value)
+                        setattr(data, key, value)
                 db.session.commit()
             except Exception as e:
                 return {"message": "Got error {!r}".format(e)}, 403
