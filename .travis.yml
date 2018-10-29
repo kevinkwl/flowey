@@ -9,4 +9,4 @@ install:
 before_script:
   - cd flowey-server
 script:
-  - FLASK_APP=flasky.py flask testa
+  - FLASK_APP=flasky.py flask test
