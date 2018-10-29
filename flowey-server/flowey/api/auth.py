@@ -84,9 +84,5 @@ class Logout(Resource):
 class Show(Resource):
     # @jwt_required
     def get(self):
-        # data = User.query.all()
-        # result = [{'username': x.username, 'password': x.password,
-        #            'email': x.email} for x in data]
-        data = [d._asdict() for d in User.query.all()]
-        print(data)
-        return data
+        data = [d.as_dict() for d in User.query.all()]
+        return data, 200

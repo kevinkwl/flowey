@@ -23,37 +23,39 @@ class Transactions_all(Resource):
                         help='transaction date')
     parser.add_argument('last_modified', type=str, required=True,
                         help='transaction last modified date and time')
-    parser.add_argument('user_id', type=int, required=True,
-                        help='transaction user id')
 
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
-        data = Transaction.query.filter_by(user_id=user_id).all()
-        return jsonify(data), 200
+        data = [d.as_dict()
+                for d in Transaction.query.filter_by(user_id=user_id).all()]
+        return data, 200
 
-    #@jwt_required
+    @jwt_required
     def post(self):
-        print("post start!!!")
+
         args = self.parser.parse_args()
 
         try:
-            _date = datetime.date(*map(int, args['date'].split('-')))
-            _datetime = datetime.datetime.strptime(args['last_modified'], '%Y-%m-%d %H:%M:%S')
+            args['date'] = datetime.date(*map(int, args['date'].split('-')))
+            args['last_modified'] = datetime.datetime.strptime(
+                args['last_modified'], '%Y-%m-%d %H:%M:%S')
+
+            user_id = get_jwt_identity()
+            print(user_id)
 
             new_transaction = Transaction(args['amount'], args['currency'], args['category'],
-                                                            _date, _datetime, args['user_id'])
+                                          args['date'], args['last_modified'], user_id)
             db.session.add(new_transaction)
             db.session.commit()
-
         except Exception as e:
             return {"message": "Got error {!r}".format(e)}, 403
         else:
             return {"message": "Transaction creation succeeded"}, 200
 
 
-
-@api.route('/<transaction_id>')
+# ! BUG HERE
+@api.route('/<int:transaction_id>')
 class Transaction_single(Resource):
 
     parser = reqparse.RequestParser()
@@ -67,21 +69,21 @@ class Transaction_single(Resource):
                         help='transaction date')
     parser.add_argument('last_modified', type=str, required=True,
                         help='transaction last modified date and time')
-    parser.add_argument('user_id', type=int, required=True,
-                        help='transaction user id')
 
     def __init__(self, transaction_id):
+        print(transaction_id)
         self.data = Transaction.query.filter_by(
-            transaction_id=transaction_id).one()
+            transaction_id=int(transaction_id)).one()
 
-    @jwt_required
+    # @jwt_required
     def get(self):
         if self.data:
-            return jsonify(self.data), 200
+            data = self.data.as_dict()
+            return data, 200
         else:
             return {"message": "Transaction not found"}, 404
 
-    @jwt_required
+    # @jwt_required
     def delete(self):
         if self.data:
             db.session.delete(self.data)
@@ -90,10 +92,16 @@ class Transaction_single(Resource):
         else:
             return {"message": "Transaction not found"}, 404
 
-    @jwt_required
+    # @jwt_required
     def put(self):
         if self.data:
             args = self.parser.parse_args()
+            if args['date'] is not None:
+                args['date'] = datetime.date(
+                    *map(int, args['date'].split('-')))
+            if args['last_modified'] is not None:
+                args['last_modified'] = datetime.datetime.strptime(
+                    args['last_modified'], '%Y-%m-%d %H:%M:%S')
             try:
                 for key, value in args.items():
                     if value is not None:
@@ -111,5 +119,5 @@ class Transaction_single(Resource):
 class Show(Resource):
     # @jwt_required
     def get(self):
-        data = [d.__dict__ for d in Transaction.query.all()]
-        return jsonify(data), 200
+        data = [d.as_dict() for d in Transaction.query.all()]
+        return data, 200

@@ -1,4 +1,13 @@
 from .ext import db
+from datetime import date, datetime
+
+
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    return obj
 
 
 class User(db.Model):
@@ -14,17 +23,20 @@ class User(db.Model):
         self.email = email
 
     def __repr__(self):
-        # return '<User %r>' % self.username
-        return "id:{} username:{} password:{} email:{}".format(self.id, self.username, self.password, self.email)
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
 
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
     transaction_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    amount = db.Column(db.Integer, nullable=False) # record in the actual amount * 100
+    # record in the actual amount * 100
+    amount = db.Column(db.Integer, nullable=False)
     currency = db.Column(db.String(10), nullable=False)
-    category = db.Column(db.Integer, nullable=False) # store in int type, each int will be mapped to a string
+    # store in int type, each int will be mapped to a string
+    category = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Date, nullable=False)
     last_modified = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -38,14 +50,13 @@ class Transaction(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return "transaction_id:{} amount:{} currency:{} category:{} date:{} last_modify:{} user_id:{}" \
-               "".format(self.transaction_id, self.amount, self.currency, self.category, self.date,
-                         self.last_modified, self.user_id)
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
 
+    def as_dict(self):
+        return {c.name: json_serial(getattr(self, c.name)) for c in self.__table__.columns}
 
 
 class TokenBlackList(db.Model):
-    pass
     __tablename__ = 'tokenblacklist'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     jti = db.Column(db.String(36), nullable=False)
@@ -56,4 +67,7 @@ class TokenBlackList(db.Model):
         self.revoked = True
 
     def __repr__(self):
-        return "id:{} jti:{} revoked:{}".format(self.id, self.jti, self.revoked)
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
