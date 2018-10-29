@@ -31,11 +31,7 @@ class AllTransactions(Resource):
 
     @jwt_required
     def post(self):
-        print("post")
-
         args = self.parser.parse_args()
-        print("parse end")
-        print(args)
 
         try:
             args['date'] = datetime.date(*map(int, args['date'].split('-')))
@@ -66,8 +62,6 @@ class SingleTransaction(Resource):
                         help='transaction category')
     parser.add_argument('date', type=str, required=False,
                         help='transaction date')
-    parser.add_argument('last_modified', type=str, required=False,
-                        help='transaction last modified date and time')
 
     @jwt_required
     def get(self, transaction_id):
@@ -99,9 +93,8 @@ class SingleTransaction(Resource):
             if args['date'] is not None:
                 args['date'] = datetime.date(
                     *map(int, args['date'].split('-')))
-            if args['last_modified'] is not None:
-                args['last_modified'] = datetime.datetime.strptime(
-                    args['last_modified'], '%Y-%m-%d %H:%M:%S')
+            args['last_modified'] = datetime.datetime.now().replace(microsecond=0)
+
             try:
                 for key, value in args.items():
                     if value is not None:
