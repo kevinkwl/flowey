@@ -4,7 +4,9 @@ python:
 
 # install dependencies
 install:
-  - pip install -r flowey/requirements.txt
+  - pip install -r flowey-server/requirements.txt
 
+before-script:
+  - cd flowey-server
 script:
   - flask test
