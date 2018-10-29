@@ -97,3 +97,11 @@ class Transaction_single(Resource):
                 return {"message": "Transaction update succeeded"}, 200
         else:
             return {"message": "Transaction not found"}, 404
+
+
+@api.route('/show')
+class Show(Resource):
+    @jwt_required
+    def get(self):
+        data = Transaction.query.all()
+        return jsonify(data), 200
