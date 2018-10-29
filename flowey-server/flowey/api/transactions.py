@@ -21,8 +21,6 @@ class AllTransactions(Resource):
                         help='transaction category')
     parser.add_argument('date', type=str, required=True,
                         help='transaction date')
-    parser.add_argument('last_modified', type=str, required=True,
-                        help='transaction last modified date and time')
 
     @jwt_required
     def get(self):
@@ -33,19 +31,21 @@ class AllTransactions(Resource):
 
     @jwt_required
     def post(self):
+        print("post")
 
         args = self.parser.parse_args()
+        print("parse end")
+        print(args)
 
         try:
             args['date'] = datetime.date(*map(int, args['date'].split('-')))
-            args['last_modified'] = datetime.datetime.strptime(
-                args['last_modified'], '%Y-%m-%d %H:%M:%S')
+            time_now = datetime.datetime.now().replace(microsecond=0) # without microsecond
 
             user_id = get_jwt_identity()
             print(user_id)
 
             new_transaction = Transaction(args['amount'], args['currency'], args['category'],
-                                          args['date'], args['last_modified'], user_id)
+                                          args['date'], time_now, user_id)
             db.session.add(new_transaction)
             db.session.commit()
         except Exception as e:
