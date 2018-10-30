@@ -38,7 +38,6 @@ class AllTransactions(Resource):
             time_now = datetime.datetime.now().replace(microsecond=0) # without microsecond
 
             user_id = get_jwt_identity()
-            print(user_id)
 
             new_transaction = Transaction(args['amount'], args['currency'], args['category'],
                                           args['date'], time_now, user_id)
@@ -66,7 +65,7 @@ class SingleTransaction(Resource):
     @jwt_required
     def get(self, transaction_id):
         data = Transaction.query.filter_by(
-            transaction_id=transaction_id).one()
+            transaction_id=transaction_id).one_or_none()
         if data:
             data = data.as_dict()
             return data, 200
@@ -76,7 +75,7 @@ class SingleTransaction(Resource):
     @jwt_required
     def delete(self, transaction_id):
         data = Transaction.query.filter_by(
-            transaction_id=transaction_id).one()
+            transaction_id=transaction_id).one_or_none()
         if data:
             db.session.delete(data)
             db.session.commit()
@@ -87,7 +86,7 @@ class SingleTransaction(Resource):
     @jwt_required
     def put(self, transaction_id):
         data = Transaction.query.filter_by(
-            transaction_id=transaction_id).one()
+            transaction_id=transaction_id).one_or_none()
         if data:
             args = self.parser.parse_args()
             if args['date'] is not None:
