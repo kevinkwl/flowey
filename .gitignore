@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/swift,xcode,flask,python
 
 flowey-server/*.db
+flowey-server/sample_data_ids.pkl
 
 ### Flask ###
 instance/*

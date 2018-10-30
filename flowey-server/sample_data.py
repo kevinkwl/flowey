@@ -2,6 +2,8 @@ from flowey import db, create_app
 from flowey.models import User, Transaction
 from faker import Faker
 import random
+import argparse
+import pickle
 
 
 class SampleData():
@@ -14,6 +16,20 @@ class SampleData():
     def __init__(self, nusers=5, ntransactions=5):
         self.nusers = nusers
         self.ntransactions = ntransactions
+
+    def save_ids(self):
+        ids = {
+            'uids': self.uids,
+            'tids': self.tids
+        }
+        with open('sample_data_ids.pkl', 'wb') as f:
+            pickle.dump(ids, f)
+
+    def load_ids(self):
+        with open('sample_data_ids.pkl', 'rb') as f:
+            ids = pickle.load(f)
+        self.uids = ids['uids']
+        self.tids = ids['tids']
 
     def add_users(self):
         for _ in range(self.nusers):
@@ -52,8 +68,28 @@ class SampleData():
 
 
 if __name__ == '__main__':
-    sd = SampleData()
-    sd.add_users()
-    sd.add_transactions()
-    sd.del_transactions()
-    sd.del_users()
+    """
+    run python sample_data.py [--nu <nu>] [--nt <nt>] to create sample data, 
+    where <nu> is number of users to generate, <nt> is number of transactions per user to generate
+
+    run python sample_data.py -d to delete sample data
+    """
+
+    parser = argparse.ArgumentParser(description='Sample Data Args')
+    parser.add_argument('-d', action='store_true',
+                        default=False, help='Delete sample data?')
+    parser.add_argument('--nu', type=int, default=5, help='Number of users')
+    parser.add_argument('--nt', type=int, default=5,
+                        help='Number of transactions per user')
+    args = parser.parse_args()
+
+    sd = SampleData(args.nu, args.nt)
+
+    if not args.d:
+        sd.add_users()
+        sd.add_transactions()
+        sd.save_ids()
+    else:
+        sd.load_ids()
+        sd.del_transactions()
+        sd.del_users()
