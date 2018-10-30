@@ -41,3 +41,13 @@ def test(coverage):
         COV.html_report(directory=covdir)
         print('HTML version: file://%s/index.html' % covdir)
         COV.erase()
+
+
+@app.cli.command()
+def sampledata():
+    from sample_data import SampleData
+    sd = SampleData()
+    sd.add_users()
+    sd.del_users()
+    sd.add_transactions()
+    sd.del_transactions()

@@ -50,7 +50,7 @@ class FlaskAuthenticationTestCase(unittest.TestCase):
         }, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue('real_kevin' in response.get_data(
-                as_text=True))
+            as_text=True))
         d = json.loads(response.get_data(as_text=True))
         header = {'authorization': ' Bearer ' + d['jwt_token']}
         return header
@@ -73,7 +73,8 @@ class FlaskAuthenticationTestCase(unittest.TestCase):
         header = self.test_log_in()
 
         # log out
-        response = self.client.delete('/auth/logout', headers=header, follow_redirects=True)
+        response = self.client.delete(
+            '/auth/logout', headers=header, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Successfully logged out' in response.get_data(
             as_text=True))
