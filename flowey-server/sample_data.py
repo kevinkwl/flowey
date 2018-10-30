@@ -1,16 +1,19 @@
-from flowey.ext import db
+from flowey import db, create_app
 from flowey.models import User, Transaction
 from faker import Faker
 import random
 
 
 class SampleData():
-    def __init__(self):
-        self.nusers = 5
-        self.ntransactions = 5
-        self.fake = Faker()
-        self.uids = []
-        self.tids = []
+    fake = Faker()
+    uids = set()
+    tids = set()
+    app = create_app('default')
+    app.app_context().push()
+
+    def __init__(self, nusers=5, ntransactions=5):
+        self.nusers = nusers
+        self.ntransactions = ntransactions
 
     def add_users(self):
         for _ in range(self.nusers):
@@ -19,12 +22,13 @@ class SampleData():
                             self.fake.email())
             db.session.add(new_user)
             db.session.commit()
-            self.uids.append(new_user.id)
+            self.uids.add(new_user.id)
 
     def del_users(self):
         for uid in self.uids:
             User.query.filter_by(id=uid).delete()
             db.session.commit()
+        self.uids.clear()
 
     def add_transactions(self):
         for _ in range(self.nusers*self.ntransactions):
@@ -35,15 +39,16 @@ class SampleData():
                                               start_date='-90d', end_date='today'),
                                           self.fake.past_datetime(
                                               start_date='-30d'),
-                                          random.choice(self.uids))
+                                          random.sample(self.uids, 1)[0])
             db.session.add(new_transaction)
             db.session.commit()
-            self.tids.append(new_transaction.transaction_id)
+            self.tids.add(new_transaction.transaction_id)
 
     def del_transactions(self):
         for tid in self.tids:
             Transaction.query.filter_by(transaction_id=tid).delete()
             db.session.commit()
+        self.tids.clear()
 
 
 if __name__ == '__main__':
