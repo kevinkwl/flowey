@@ -69,20 +69,8 @@ class FlaskAuthenticationTestCase(unittest.TestCase):
             as_text=True))
 
     def test_log_out(self):
-        # register a new account
-        self.test_register()
-
-        # log in with the new account
-        response = self.client.post('/auth/login', data={
-            'email': 'kevin@columbia.edu',
-            'password': '123'
-        }, follow_redirects=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('real_kevin' in response.get_data(
-            as_text=True))
-
-        d = json.loads(response.get_data(as_text=True))
-        header = {'authorization': ' Bearer ' + d['jwt_token']}
+        # log in with an account
+        header = self.test_log_in()
 
         # log out
         response = self.client.delete('/auth/logout', headers=header, follow_redirects=True)
