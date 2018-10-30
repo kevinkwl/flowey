@@ -4,6 +4,7 @@ import click
 from flowey import create_app, db
 from flowey.models import User
 from flask_migrate import Migrate
+from scripts.sample_data import SampleData
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 migrate = Migrate(app, db)
@@ -45,9 +46,8 @@ def test(coverage):
 
 @app.cli.command()
 def sampledata():
-    from sample_data import SampleData
     sd = SampleData()
     sd.add_users()
-    sd.del_users()
     sd.add_transactions()
     sd.del_transactions()
+    sd.del_users()
