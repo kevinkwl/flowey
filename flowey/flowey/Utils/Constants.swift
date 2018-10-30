@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct Constants {
-    static let APIBaseURL = "http://127.0.0.1:5000"
+    static let APIBaseURL = "http://192.168.1.34:5000"
     
     static let JWT_Token_Key = "jwt_token"
     
