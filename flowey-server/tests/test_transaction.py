@@ -133,3 +133,8 @@ class FlaskTransactionTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 404)
         self.assertTrue('Transaction not found' in response.get_data(
             as_text=True))
+
+    def test_debug(self):
+        # test show all
+        response = self.client.get('/transactions/show')
+        self.assertEqual(response.status_code, 200)

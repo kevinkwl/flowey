@@ -78,3 +78,8 @@ class FlaskAuthenticationTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Successfully logged out' in response.get_data(
             as_text=True))
+
+    def test_debug(self):
+        # test show all
+        response = self.client.get('/auth/show')
+        self.assertEqual(response.status_code, 200)
