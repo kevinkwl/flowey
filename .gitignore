@@ -1,7 +1,7 @@
 
 # Created by https://www.gitignore.io/api/swift,xcode,flask,python
 
-flowey-server/flowey.db
+flowey-server/*.db
 
 ### Flask ###
 instance/*
