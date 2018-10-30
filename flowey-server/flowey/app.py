@@ -6,6 +6,7 @@ from flowey.api import api
 
 def create_app(config_name):
     app = Flask(__name__)
+    app.url_map.strict_slashes = False
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
     register_extensions(app)
