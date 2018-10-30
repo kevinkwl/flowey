@@ -18,3 +18,13 @@ def test():
     import unittest
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
+
+
+@app.cli.command()
+def sampledata():
+    from sample_data import SampleData
+    sd = SampleData()
+    sd.add_users()
+    sd.del_users()
+    sd.add_transactions()
+    sd.del_transactions()
