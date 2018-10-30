@@ -15,7 +15,15 @@
 		0A34A85D2184BC5200B43AEB /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A85C2184BC5200B43AEB /* ColorTheme.swift */; };
 		0A34A8622186944B00B43AEB /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8612186944B00B43AEB /* TransactionCell.swift */; };
 		0A34A8642186A0BB00B43AEB /* TransactionSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8632186A0BB00B43AEB /* TransactionSectionCell.swift */; };
-		0A34A8672186A35F00B43AEB /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8662186A35F00B43AEB /* TransactionViewController.swift */; };
+		0A34A8672186A35F00B43AEB /* TransactionListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8662186A35F00B43AEB /* TransactionListVC.swift */; };
+		0A34A8692187470200B43AEB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8682187470200B43AEB /* Transaction.swift */; };
+		0A34A86B21874E0000B43AEB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A86A21874E0000B43AEB /* Color.swift */; };
+		0AC0FA2C2187772F0038FDEA /* UserTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0FA2B2187772F0038FDEA /* UserTransactionVC.swift */; };
+		0AC0FA2F2187A3F60038FDEA /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0FA2E2187A3F60038FDEA /* CircleImageView.swift */; };
+		0AC0FA332187B1DD0038FDEA /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0FA322187B1DD0038FDEA /* FakeData.swift */; };
+		0AC0FA352187D7970038FDEA /* SiestaUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC0FA342187D7970038FDEA /* SiestaUI.framework */; };
+		0AC0FA372188ACD20038FDEA /* NewTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0FA362188ACD20038FDEA /* NewTransactionVC.swift */; };
+		0AC0FA392188BF4C0038FDEA /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0FA382188BF4C0038FDEA /* PickerTextField.swift */; };
 		0AD06FA321814EAE00779C85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FA221814EAE00779C85 /* AppDelegate.swift */; };
 		0AD06FA821814EAE00779C85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AD06FA621814EAE00779C85 /* Main.storyboard */; };
 		0AD06FAA21814EAF00779C85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD06FA921814EAF00779C85 /* Assets.xcassets */; };
@@ -54,7 +62,15 @@
 		0A34A85C2184BC5200B43AEB /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		0A34A8612186944B00B43AEB /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		0A34A8632186A0BB00B43AEB /* TransactionSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSectionCell.swift; sourceTree = "<group>"; };
-		0A34A8662186A35F00B43AEB /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		0A34A8662186A35F00B43AEB /* TransactionListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListVC.swift; sourceTree = "<group>"; };
+		0A34A8682187470200B43AEB /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		0A34A86A21874E0000B43AEB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		0AC0FA2B2187772F0038FDEA /* UserTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTransactionVC.swift; sourceTree = "<group>"; };
+		0AC0FA2E2187A3F60038FDEA /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		0AC0FA322187B1DD0038FDEA /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
+		0AC0FA342187D7970038FDEA /* SiestaUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SiestaUI.framework; path = Carthage/Build/iOS/SiestaUI.framework; sourceTree = "<group>"; };
+		0AC0FA362188ACD20038FDEA /* NewTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionVC.swift; sourceTree = "<group>"; };
+		0AC0FA382188BF4C0038FDEA /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
 		0AD06F9F21814EAE00779C85 /* flowey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flowey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD06FA221814EAE00779C85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AD06FA721814EAE00779C85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A34A8562182B4F300B43AEB /* Siesta.framework in Frameworks */,
+				0AC0FA352187D7970038FDEA /* SiestaUI.framework in Frameworks */,
 				0A34A85B2184B9AD00B43AEB /* SkyFloatingLabelTextField.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +128,7 @@
 		0A34A8512182B1F100B43AEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A34A8682187470200B43AEB /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -118,6 +136,7 @@
 		0A34A8542182B4F200B43AEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AC0FA342187D7970038FDEA /* SiestaUI.framework */,
 				0A34A85A2184B9AD00B43AEB /* SkyFloatingLabelTextField.framework */,
 				0A34A8552182B4F300B43AEB /* Siesta.framework */,
 			);
@@ -127,6 +146,7 @@
 		0A34A85E218693E900B43AEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0AC0FA2D2187A3C60038FDEA /* General */,
 				0AD06FA621814EAE00779C85 /* Main.storyboard */,
 				0A34A8612186944B00B43AEB /* TransactionCell.swift */,
 				0A34A8632186A0BB00B43AEB /* TransactionSectionCell.swift */,
@@ -137,9 +157,19 @@
 		0A34A8652186A33B00B43AEB /* Trans */ = {
 			isa = PBXGroup;
 			children = (
-				0A34A8662186A35F00B43AEB /* TransactionViewController.swift */,
+				0A34A8662186A35F00B43AEB /* TransactionListVC.swift */,
+				0AC0FA362188ACD20038FDEA /* NewTransactionVC.swift */,
 			);
 			path = Trans;
+			sourceTree = "<group>";
+		};
+		0AC0FA2D2187A3C60038FDEA /* General */ = {
+			isa = PBXGroup;
+			children = (
+				0AC0FA2E2187A3F60038FDEA /* CircleImageView.swift */,
+				0AC0FA382188BF4C0038FDEA /* PickerTextField.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		0AD06F9621814EAE00779C85 = {
@@ -203,6 +233,8 @@
 				0AD06FD12181F5E800779C85 /* Constants.swift */,
 				0A34A8582184ADB600B43AEB /* Utility.swift */,
 				0A34A85C2184BC5200B43AEB /* ColorTheme.swift */,
+				0A34A86A21874E0000B43AEB /* Color.swift */,
+				0AC0FA322187B1DD0038FDEA /* FakeData.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -214,6 +246,7 @@
 				0AD06FD8218255B600779C85 /* Authentication */,
 				0AD06FD921825D2F00779C85 /* MainTabViewController.swift */,
 				0A34A84E218286C900B43AEB /* SettingViewController.swift */,
+				0AC0FA2B2187772F0038FDEA /* UserTransactionVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -365,6 +398,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Siesta.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SkyFloatingLabelTextField.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SiestaUI.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -372,6 +406,7 @@
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Siesta.framework",
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SkyFloatingLabelTextField.framework",
+				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SiestaUI.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -384,17 +419,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AC0FA2F2187A3F60038FDEA /* CircleImageView.swift in Sources */,
 				0A34A85D2184BC5200B43AEB /* ColorTheme.swift in Sources */,
 				0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */,
 				0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */,
+				0AC0FA2C2187772F0038FDEA /* UserTransactionVC.swift in Sources */,
 				0A34A8532182B21A00B43AEB /* FloweyAPI.swift in Sources */,
 				0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */,
+				0AC0FA332187B1DD0038FDEA /* FakeData.swift in Sources */,
+				0A34A8692187470200B43AEB /* Transaction.swift in Sources */,
+				0AC0FA392188BF4C0038FDEA /* PickerTextField.swift in Sources */,
 				0A34A8592184ADB600B43AEB /* Utility.swift in Sources */,
 				0A34A8642186A0BB00B43AEB /* TransactionSectionCell.swift in Sources */,
-				0A34A8672186A35F00B43AEB /* TransactionViewController.swift in Sources */,
+				0A34A8672186A35F00B43AEB /* TransactionListVC.swift in Sources */,
+				0A34A86B21874E0000B43AEB /* Color.swift in Sources */,
 				0AD06FA321814EAE00779C85 /* AppDelegate.swift in Sources */,
 				0AD06FD22181F5E800779C85 /* Constants.swift in Sources */,
 				0A34A8622186944B00B43AEB /* TransactionCell.swift in Sources */,
+				0AC0FA372188ACD20038FDEA /* NewTransactionVC.swift in Sources */,
 				0A34A84F218286C900B43AEB /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
