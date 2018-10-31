@@ -6,7 +6,7 @@
 
 GITHOOKS_DIR=$(git rev-parse --show-toplevel)/.git/hooks
 # Rename REPOHOOKS_DIR if changing where the actual hook scripts live
-REPOHOOKS_DIR=$(git rev-parse --show-toplevel)/bin/git-hooks
+REPOHOOKS_DIR=$(git rev-parse --show-toplevel)/git-hooks
 
 # If something exists, back it up
 if [ -e "$GITHOOKS_DIR/pre-commit" ]
