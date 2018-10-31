@@ -1,0 +1,8 @@
+
+#!/bin/sh
+#
+# Simple pre-commit script that runs the test suite.
+# See .git/hooks/pre-commit.sample for other examples.
+
+cd flowey-server
+FLASK_APP=flasky.py flask test --coverage
