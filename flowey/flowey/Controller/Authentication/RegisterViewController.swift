@@ -42,9 +42,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        FloweyAPI.register(emailText, pwdText, nameText, onSuccess: {
+        FloweyAPI.register(emailText, pwdText, nameText, onSuccess: { [weak self] () in
             // set login
             print("registered!")
+            self?.performSegue(withIdentifier: "goLogin", sender: self)
         }, onFailure: { (error) in
             print(error)
         })
