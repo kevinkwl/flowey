@@ -7,6 +7,8 @@ install:
 script:
   - ./test.sh
 
+before-deploy:
+  - mv `git ls-files -o -x reports` reports/
 deploy:
   provider: pages
   skip-cleanup: true
