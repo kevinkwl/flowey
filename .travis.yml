@@ -3,8 +3,7 @@ python:
   - '3.6'
 install:
   - pip install -r flowey-server/requirements.txt
-before_script:
-  - cd flowey-server
+
 script:
   - ./test.sh
 
