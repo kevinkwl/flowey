@@ -12,6 +12,7 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   target-branch: test-reports
+  local-dir: reports
   on:
     branch: master
 

@@ -283,3 +283,10 @@ iOSInjectionProject/
 
 
 # End of https://www.gitignore.io/api/swift,xcode,flask,python
+
+
+# tmps
+*/tmp*
+
+# ignore local reports
+reports
