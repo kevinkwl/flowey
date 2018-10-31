@@ -1,12 +1,15 @@
 language: python
 python:
-  - "3.6"
-
-# install dependencies
+  - '3.6'
 install:
   - pip install -r flowey-server/requirements.txt
-
 before_script:
   - cd flowey-server
 script:
-  - FLASK_APP=flasky.py flask test --coverage
+  - ./test.sh
+
+after_success:
+  - .travis/push_results.sh
+env:
+  global:
+    secure: W19dEZgFmw8fxbnxZjjjKeArzz68t5V86dqwwME1VrK+9raFny1FD50T6XLQd/D1S9tLLc9QfuQm0IrUVQl75iXdI8TNFUsGA8crNFl6gvac1pGeDXjr2EYsqGERxmE0rKmq+cMBmM/y/BN6tkc4c4NfkglPuRkN/sAooQ7lqXhVJu7Qe5Tntw7akcU5eZ5NDaJpn3EzyL7nz5ZRLww1XpEPhxOltoSUM3SNDqe2qhj7qLJ8Ad2Z/S33HxAo+q16zOESsiq14KQWG0TGW9qJ5IqM4aEdo0IrJD2NFZVGDfYcmz64QO/6S+k8X8X0HPhQAPleDhkoTAow59ghgdV0FqdRkqTRzS4wBK0FLFu3uc+QvgcQYeBXAqAqcT4zC2+xmrHBXzMpVqf3lAmtCK+e5/PSWjVk0PPhHz53kx1UMHbUiGKFUGSscuSZzrtmbgb4LSzSj7JndAnb61PoYuuiRAxVsqTAb2y7O4HMSp6z+hsBYxbfzLbl2Mmx0c9jTwGmQafOk9clyESaltT5onWNXRsaxdOZ25Tg7Xdghsz9uV7rqfQXbwjgtOdZYf5HD0fT+a+3S54u9WqZNT1NOTXMoIKySuFUIyM2YU8uixSArDNVhoHH23URzPcU3fBtXzlKD+U3zMAgLhkKDdQp8/d85RYZ1mg7DxmQS+1y7TvolMY=
