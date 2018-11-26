@@ -1,5 +1,6 @@
 from .ext import db
 from datetime import date, datetime
+from flowey.utils import Category
 
 
 def json_serial(obj):
@@ -51,7 +52,8 @@ class User(db.Model):
         self.email = email
 
     def __repr__(self):
-        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c
+                         in self.__table__.columns])
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -92,13 +94,27 @@ class User(db.Model):
     def agree_friend_request_from(self, user):
         if self.has_friend_request_from(user):
             self.friend_received.remove(user)
+            if self.has_friend_request_to(user):
+                self.friend_requested.remove(user)
             self.add_friend(user)
             db.session.add(self)
             db.session.commit()
 
-    def get_friends(self):
-        return [user.username for user in self.friends]
+    def reject_friend_request_from(self, user):
+        if self.has_friend_request_from(user):
+            self.friend_received.remove(user)
+            db.session.add(self)
+            db.session.commit()
+            return True
+        return False
 
+    def get_friends(self):
+        return [{"username": user.username, "id": user.id} for user
+                in self.friends]
+
+    def get_friend_requests(self):
+        return [{"username": user.username, "id": user.id} for user
+                in self.friend_received]
 
 
 class Transaction(db.Model):
@@ -113,19 +129,53 @@ class Transaction(db.Model):
     last_modified = db.Column(db.DateTime, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __init__(self, amount, currency, category, date, last_modified, user_id):
+    object_user_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                               nullable=True)
+
+    def __init__(self, amount, currency, category, date, last_modified,
+                 user_id, object_user_id=None):
         self.amount = amount
         self.currency = currency
         self.category = category
         self.date = date
         self.last_modified = last_modified
         self.user_id = user_id
+        if object_user_id is not None:
+            self.object_user_id = object_user_id
 
     def __repr__(self):
-        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c
+                         in self.__table__.columns])
 
     def as_dict(self):
-        return {c.name: json_serial(getattr(self, c.name)) for c in self.__table__.columns}
+        return {c.name: json_serial(getattr(self, c.name)) for c
+                in self.__table__.columns}
+
+    def get_borrow_trans(self, borrower_id):
+        borrow = Transaction(self.amount, self.currency, Category.BORROW,
+                             self.date, self.last_modified, self.user_id,
+                             object_user_id=borrower_id)
+        return borrow
+
+    def get_lend_trans(self, lender_id):
+        lend = Transaction(self.amount, self.currency, Category.LEND,
+                           self.date, self.last_modified, lender_id,
+                           object_user_id=self.user_id)
+        return lend
+
+    @staticmethod
+    def get_flow_trans(amount, currency, category, date, last_modified,
+                       user_id, object_user_id):
+        trans = []
+        t = Transaction(amount, currency, category, date, last_modified,
+                        user_id, object_user_id)
+        trans.append(t)
+        if Category.is_borrow(category):
+            trans.append(t.get_lend_trans(object_user_id))
+        elif Category.is_lend(category):
+            trans.append(t.get_borrow_trans(object_user_id))
+        return trans
+
 
 
 class TokenBlackList(db.Model):
@@ -139,7 +189,8 @@ class TokenBlackList(db.Model):
         self.revoked = True
 
     def __repr__(self):
-        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c in self.__table__.columns])
+        return ', '.join(['{}:{}'.format(c.name, getattr(self, c.name)) for c
+                         in self.__table__.columns])
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

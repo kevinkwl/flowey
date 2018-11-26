@@ -1,6 +1,7 @@
 from flask_restplus import Namespace, Resource, reqparse
-from flowey.models import User, TokenBlackList, Transaction
+from flowey.models import Transaction
 from flowey.ext import db, jwt
+from flowey.utils import Category
 from flask_jwt_extended import (get_jwt_identity, get_raw_jwt, jwt_required)
 from werkzeug.security import safe_str_cmp
 from flask import jsonify
@@ -21,25 +22,75 @@ class AllTransactions(Resource):
                         help='transaction category')
     parser.add_argument('date', type=str, required=True,
                         help='transaction date')
+    parser.add_argument('object_user_id', type=int, help='lend/borrow/return')
+    parser.add_argument('split_with', type=int, help='split bill',
+                        action='append', default=None)
 
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
         data = [d.as_dict()
-                for d in Transaction.query.filter_by(user_id=user_id).all()]
+                for d in Transaction.query.filter_by(user_id=user_id)
+                .order_by(Transaction.date.desc()).all()]
         return data, 200
 
     @jwt_required
     def post(self):
+        user_id = get_jwt_identity()
         args = self.parser.parse_args()
 
+        args['date'] = datetime.date(*map(int, args['date'].split('-')))
+        # without microsecond
+        time_now = datetime.datetime.now().replace(microsecond=0)
+        amount, currency, category, tdate = args['amount'], args['currency'],\
+                args['category'], args['date']
+
+        # Flow -> Borrow, Lend, or Return money, multiple transactions
+        if Category.is_flow(category):
+            if 'object_user_id' not in args:
+                return {"message": "object user id not found."}, 400
+            object_user_id = args['object_user_id']
+
+            trans = Transaction.get_flow_trans(amount, currency, category,
+                                               tdate, time_now, user_id,
+                                               object_user_id)
+            for t in trans:
+                db.session.add(t)
+                db.session.commit()
+
+            return {"message": "Transaction creation succeeded"}, 200
         try:
-            args['date'] = datetime.date(*map(int, args['date'].split('-')))
-            time_now = datetime.datetime.now().replace(microsecond=0) # without microsecond
+            split_with = args['split_with']
+            total_amount = args['amount']
+            remaining = total_amount
+            if split_with is not None and len(split_with) > 0:
+                n_split = len(split_with) + 1
 
-            user_id = get_jwt_identity()
+                # TODO: implement custom share in the future
+                share = total_amount // n_split
+                for splitter_id in split_with:
+                    myshare = share
 
-            new_transaction = Transaction(args['amount'], args['currency'], args['category'],
+                    # B transaction
+                    mytrans = Transaction(myshare, args['currency'],
+                                          args['category'],
+                                          args['date'], time_now, splitter_id)
+                    db.session.add(mytrans)
+                    db.session.commit()
+
+                    # B borrow from user
+                    db.session.add(mytrans.get_borrow_trans(user_id))
+                    db.session.commit()
+
+                    # user lend to B
+                    db.session.add(mytrans.get_lend_trans(user_id))
+                    db.session.commit()
+
+                    remaining -= myshare
+
+            # remaining
+            new_transaction = Transaction(remaining, args['currency'],
+                                          args['category'],
                                           args['date'], time_now, user_id)
             db.session.add(new_transaction)
             db.session.commit()

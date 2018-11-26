@@ -48,7 +48,6 @@ class FriendsTestCase(unittest.TestCase):
         self.assertEqual(len(user1.get_friends()), 1)
         self.assertEqual(len(user2.get_friends()), 1)
 
-        self.assertEqual(user1.get_friends()[0], user2.username)
-        self.assertEqual(user2.get_friends()[0], user1.username)
-
+        self.assertEqual(user1.get_friends()[0]['username'], user2.username)
+        self.assertEqual(user2.get_friends()[0]['username'], user1.username)
 
