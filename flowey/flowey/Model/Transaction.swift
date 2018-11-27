@@ -16,6 +16,7 @@ struct Transaction: Codable {
     var date: String
     let user_id: Int
     var last_modified: String
+    var object_user_id: Int?
     
     func real_amount() -> Int {
         if categories[category] == "Borrowing" {

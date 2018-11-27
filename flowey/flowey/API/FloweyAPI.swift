@@ -35,6 +35,13 @@ class _FloweyAPI: Service {
             try jsonDecoder.decode([Transaction].self, from: $0.content)
         }
         
+        configureTransformer("/friends", requestMethods: [.get]) {
+            try jsonDecoder.decode([Friend].self, from: $0.content)
+        }
+        
+        configureTransformer("/friends/request", requestMethods: [.get]) {
+            try jsonDecoder.decode([FriendRequest].self, from: $0.content)
+        }
     }
     
     var authToken: String? {
@@ -115,7 +122,7 @@ class _FloweyAPI: Service {
     
     func updateTransaction(_ tid: Int, transDict: [String: Any], onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
         self.transactions.child("/\(tid)")
-            .request(.put)
+            .request(.put, json: transDict)
             .onSuccess { entity in
                 onSuccess()
             }
@@ -136,5 +143,60 @@ class _FloweyAPI: Service {
                 print(error.userMessage)
                 onFailure(error.userMessage)
             }
+    }
+    
+    // friends
+    var friends: Resource {
+        return self.resource("/friends")
+    }
+    
+    func removeFriend(_ friend_id: Int, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.friends.child("/\(friend_id)")
+            .request(.delete)
+            .onSuccess { entity in
+                print("success delete \(friend_id)")
+                onSuccess()
+            }
+            .onFailure { error in
+                print(error.userMessage)
+                onFailure(error.userMessage)
+        }
+    }
+    
+    func friendRequest(_ email: String, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.friends.child("/request")
+            .request(.post, json: ["email": email])
+            .onSuccess { entity in
+                print("friend request sent to user with email address \(email)")
+                onSuccess()
+            }
+            .onFailure { error in
+                print(error.userMessage)
+                onFailure(error.userMessage)
+        }
+    }
+    
+    var friend_requests: Resource {
+        return self.resource("/friends/request")
+    }
+    
+    func respondToFriendRequest(_ from_user: Int, action: String, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.friends.child("/request")
+            .request(.put, json: ["friend_id": from_user, "action": action])
+            .onSuccess { entity in
+                onSuccess()
+            }
+            .onFailure { error in
+                print(error.userMessage)
+                onFailure(error.userMessage)
+        }
+    }
+    
+    func agreeFriendRequest(_ from_user: Int, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.respondToFriendRequest(from_user, action: "agree", onSuccess: onSuccess, onFailure: onFailure)
+    }
+    
+    func rejectFriendRequest(_ from_user: Int, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.respondToFriendRequest(from_user, action: "reject", onSuccess: onSuccess, onFailure: onFailure)
     }
 }
