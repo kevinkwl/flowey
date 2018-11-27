@@ -109,11 +109,11 @@ class User(db.Model):
         return False
 
     def get_friends(self):
-        return [{"username": user.username, "id": user.id} for user
+        return [{"username": user.username, "user_id": user.id} for user
                 in self.friends]
 
     def get_friend_requests(self):
-        return [{"username": user.username, "id": user.id} for user
+        return [{"username": user.username, "user_id": user.id} for user
                 in self.friend_received]
 
 
@@ -163,6 +163,12 @@ class Transaction(db.Model):
                            object_user_id=self.user_id)
         return lend
 
+    def get_receive_trans(self, receiver_id):
+        receive = Transaction(self.amount, self.currency, Category.RECEIVE,
+                              self.date, self.last_modified, receiver_id,
+                              object_user_id=self.user_id)
+        return receive
+
     @staticmethod
     def get_flow_trans(amount, currency, category, date, last_modified,
                        user_id, object_user_id):
@@ -174,6 +180,8 @@ class Transaction(db.Model):
             trans.append(t.get_lend_trans(object_user_id))
         elif Category.is_lend(category):
             trans.append(t.get_borrow_trans(object_user_id))
+        elif Category.is_return(category):
+            trans.append(t.get_receive_trans(object_user_id))
         return trans
 
 

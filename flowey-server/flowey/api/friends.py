@@ -16,7 +16,18 @@ class ListFriends(Resource):
     def get(self):
         user_id = get_jwt_identity()
         user = User.query.filter_by(id=user_id).first_or_404()
-        return user.get_friends(), 200
+        results = []
+        for friend in user.friends:
+            # also get related transactions
+            finfo = {}
+            finfo['username'] = friend.username
+            finfo['user_id'] = friend.id
+            related_trans = Transaction.query.filter_by(
+                                                user_id=user_id,
+                                                object_user_id=friend.id).all()
+            finfo['flows'] = [trans.as_dict() for trans in related_trans]
+            results.append(finfo)
+        return results, 200
 
 
 @api.route('/<int:friend_id>')

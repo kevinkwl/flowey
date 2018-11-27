@@ -3,26 +3,29 @@ class Category:
     c2i = {
         "Food & Dining": 0,
         "Travel": 1,
-        "Lending": 2,
-        "Borrowing": 3,
+        "Lend": 2,
+        "Borrow": 3,
         "MISC": 4,
-        "Returning": 5,
+        "Return": 5,
+        "Receive": 6,
     }
 
     i2c = [
         "Food & Dining",
         "Travel",
-        "Lending",
-        "Borrowing",
+        "Lend",
+        "Borrow",
         "MISC",
-        "Returning"]
+        "Return",
+        "Receive"]
 
     DEFAULT_CATEGORY_INT = 4
-    FLOW_CATEGORY_INT = [2, 3, 5]
+    FLOW_CATEGORY_INT = [2, 3, 5, 6]
 
     LEND = 2
     BORROW = 3
     RETURN = 5
+    RECEIVE = 6
 
     @staticmethod
     def name(ci):
@@ -35,26 +38,33 @@ class Category:
         if isinstance(c, int):
             return c == 3
         elif isinstance(c, str):
-            return c == "Borrowing"
+            return c == "Borrow"
 
     @staticmethod
     def is_return(c):
         if isinstance(c, int):
             return c == 5
         elif isinstance(c, str):
-            return c == "Returning"
+            return c == "Return"
 
     @staticmethod
     def is_lend(c):
         if isinstance(c, int):
             return c == 2
         elif isinstance(c, str):
-            return c == "Returning"
+            return c == "Lend"
+
+    @staticmethod
+    def is_receive(c):
+        if isinstance(c, int):
+            return c == 6
+        elif isinstance(c, str):
+            return c == "Receive"
 
     @staticmethod
     def is_flow(c):
         return Category.is_borrow(c) or Category.is_lend(c) or \
-                Category.is_return(c)
+                Category.is_return(c) or Category.is_receive(c)
 
 
 
