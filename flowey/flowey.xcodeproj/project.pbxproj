@@ -34,6 +34,11 @@
 		0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD42182090200779C85 /* LoginViewController.swift */; };
 		0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD6218213DD00779C85 /* RegisterViewController.swift */; };
 		0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD921825D2F00779C85 /* MainTabViewController.swift */; };
+		1C878AEB21AB43F5001B0E2D /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AEA21AB43F5001B0E2D /* Friendship.swift */; };
+		1C878AEF21AB5D8E001B0E2D /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AEE21AB5D8E001B0E2D /* FriendsListViewController.swift */; };
+		1C878AF321AB6FF9001B0E2D /* UserFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AF221AB6FF9001B0E2D /* UserFriendsViewController.swift */; };
+		1C878AF721AB779D001B0E2D /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AF621AB779D001B0E2D /* FriendCell.swift */; };
+		1C878AF921AB879D001B0E2D /* NewFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AF821AB879D001B0E2D /* NewFriendViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +92,11 @@
 		0AD06FD42182090200779C85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AD06FD6218213DD00779C85 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0AD06FD921825D2F00779C85 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		1C878AEA21AB43F5001B0E2D /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
+		1C878AEE21AB5D8E001B0E2D /* FriendsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendsListViewController.swift; path = flowey/Model/FriendsListViewController.swift; sourceTree = SOURCE_ROOT; };
+		1C878AF221AB6FF9001B0E2D /* UserFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendsViewController.swift; sourceTree = "<group>"; };
+		1C878AF621AB779D001B0E2D /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
+		1C878AF821AB879D001B0E2D /* NewFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewFriendViewController.swift; path = flowey/View/NewFriendViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				0A34A8682187470200B43AEB /* Transaction.swift */,
+				1C878AEA21AB43F5001B0E2D /* Friendship.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +161,7 @@
 				0AD06FA621814EAE00779C85 /* Main.storyboard */,
 				0A34A8612186944B00B43AEB /* TransactionCell.swift */,
 				0A34A8632186A0BB00B43AEB /* TransactionSectionCell.swift */,
+				1C878AF621AB779D001B0E2D /* FriendCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,11 +254,13 @@
 		0AD06FD32182089400779C85 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1C878AED21AB5D66001B0E2D /* Friends */,
 				0A34A8652186A33B00B43AEB /* Trans */,
 				0AD06FD8218255B600779C85 /* Authentication */,
 				0AD06FD921825D2F00779C85 /* MainTabViewController.swift */,
 				0A34A84E218286C900B43AEB /* SettingViewController.swift */,
 				0AC0FA2B2187772F0038FDEA /* UserTransactionVC.swift */,
+				1C878AF221AB6FF9001B0E2D /* UserFriendsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -258,6 +272,16 @@
 				0AD06FD6218213DD00779C85 /* RegisterViewController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		1C878AED21AB5D66001B0E2D /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				1C878AEE21AB5D8E001B0E2D /* FriendsListViewController.swift */,
+				1C878AF821AB879D001B0E2D /* NewFriendViewController.swift */,
+			);
+			name = Friends;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,21 +444,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AC0FA2F2187A3F60038FDEA /* CircleImageView.swift in Sources */,
+				1C878AF921AB879D001B0E2D /* NewFriendViewController.swift in Sources */,
 				0A34A85D2184BC5200B43AEB /* ColorTheme.swift in Sources */,
 				0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */,
 				0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */,
 				0AC0FA2C2187772F0038FDEA /* UserTransactionVC.swift in Sources */,
 				0A34A8532182B21A00B43AEB /* FloweyAPI.swift in Sources */,
 				0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */,
+				1C878AEB21AB43F5001B0E2D /* Friendship.swift in Sources */,
 				0AC0FA332187B1DD0038FDEA /* FakeData.swift in Sources */,
 				0A34A8692187470200B43AEB /* Transaction.swift in Sources */,
+				1C878AF321AB6FF9001B0E2D /* UserFriendsViewController.swift in Sources */,
 				0AC0FA392188BF4C0038FDEA /* PickerTextField.swift in Sources */,
 				0A34A8592184ADB600B43AEB /* Utility.swift in Sources */,
 				0A34A8642186A0BB00B43AEB /* TransactionSectionCell.swift in Sources */,
 				0A34A8672186A35F00B43AEB /* TransactionListVC.swift in Sources */,
 				0A34A86B21874E0000B43AEB /* Color.swift in Sources */,
 				0AD06FA321814EAE00779C85 /* AppDelegate.swift in Sources */,
+				1C878AEF21AB5D8E001B0E2D /* FriendsListViewController.swift in Sources */,
 				0AD06FD22181F5E800779C85 /* Constants.swift in Sources */,
+				1C878AF721AB779D001B0E2D /* FriendCell.swift in Sources */,
 				0A34A8622186944B00B43AEB /* TransactionCell.swift in Sources */,
 				0AC0FA372188ACD20038FDEA /* NewTransactionVC.swift in Sources */,
 				0A34A84F218286C900B43AEB /* SettingViewController.swift in Sources */,
@@ -613,7 +642,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RCYCDAZ682;
+				DEVELOPMENT_TEAM = 92WC295JU4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -635,7 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RCYCDAZ682;
+				DEVELOPMENT_TEAM = 92WC295JU4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
