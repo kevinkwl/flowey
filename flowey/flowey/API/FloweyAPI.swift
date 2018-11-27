@@ -18,7 +18,7 @@ struct LoginResponse: Codable {
 class _FloweyAPI: Service {
     init() {
         super.init(baseURL: Constants.APIBaseURL, standardTransformers: [.text, .image])
-        //SiestaLog.Category.enabled = .all
+        SiestaLog.Category.enabled = .all
         
         configure("**", description: "jwt token") {
             $0.headers["Authorization"] = " Bearer \(self.authToken ?? "")" // use FakeToken here to bypass auth
@@ -201,6 +201,7 @@ class _FloweyAPI: Service {
     func rejectFriendRequest(_ from_user: Int, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
         self.respondToFriendRequest(from_user, action: "reject", onSuccess: onSuccess, onFailure: onFailure)
     }
+    
     func addNewFriend(_ friendDict: [String: Any], onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
         self.resource("/friends/request")
             .request(.post, json: friendDict)

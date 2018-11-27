@@ -19,7 +19,17 @@ struct Transaction: Codable {
     var object_user_id: Int?
     
     func real_amount() -> Int {
-        if categories[category] == "Borrowing" {
+        if categories[category] == "Borrow" {
+            return -1 * amount
+        } else {
+            return amount
+        }
+    }
+    
+    func flow_amount() -> Int {
+        if categories[category] == "Borrow" {
+            return -1 * amount
+        } else if categories[category] == "Return" {
             return -1 * amount
         } else {
             return amount

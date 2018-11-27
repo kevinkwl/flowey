@@ -10,5 +10,5 @@ import Foundation
 
 struct FriendRequest: Codable {
     let username: String
-    let user_id: Int
+    let id: Int
 }

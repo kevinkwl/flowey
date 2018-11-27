@@ -12,7 +12,7 @@ class NewFriendViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     
-    var friend: Friendship?
+    var friend: Friend?
     
     override func viewDidLoad() {
         super.viewDidLoad()

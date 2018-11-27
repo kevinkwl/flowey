@@ -23,6 +23,6 @@ struct Constants {
     }
 }
 
-let categories: [String] = ["Food & Dining", "Travel", "Lending", "Borrowing", "MISC"]
+let categories: [String] = ["Food & Dining", "Travel", "Lend", "Borrow", "MISC", "Return", "Receive"]
 let transactionCategoryIcon: [UIImage] = [#imageLiteral(resourceName: "food_dining"), #imageLiteral(resourceName: "travel"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "misc")]
 let transactionCategoryBC: [UIColor] = [Colorify.Lime, Colorify.Clouds, Colorify.Sunflower, Colorify.Cyan, Colorify.Yellow]
