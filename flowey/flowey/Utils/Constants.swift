@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 struct Constants {
-    static let APIBaseURL = "http://192.168.1.34:5000"
+    static let APIBaseURL = "http://127.0.0.1:5000"
     
     static let JWT_Token_Key = "jwt_token"
     
@@ -23,6 +23,7 @@ struct Constants {
     }
 }
 
-let categories: [String] = ["Food & Dining", "Travel", "Lending", "Borrowing", "MISC"]
+let categories: [String] = ["Food & Dining", "Travel", "Lending", "Borrowing", "Return", "MISC"]
+let categoryDict: [String: Int] = ["Food & Dining":0, "Travel":1, "Lending":2, "Borrowing":3, "Return":4, "MISC":5]
 let transactionCategoryIcon: [UIImage] = [#imageLiteral(resourceName: "food_dining"), #imageLiteral(resourceName: "travel"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "misc")]
 let transactionCategoryBC: [UIColor] = [Colorify.Lime, Colorify.Clouds, Colorify.Sunflower, Colorify.Cyan, Colorify.Yellow]

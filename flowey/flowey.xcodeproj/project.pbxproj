@@ -34,6 +34,8 @@
 		0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD42182090200779C85 /* LoginViewController.swift */; };
 		0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD6218213DD00779C85 /* RegisterViewController.swift */; };
 		0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD921825D2F00779C85 /* MainTabViewController.swift */; };
+		6662970A21AB687200472C66 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6662970921AB687200472C66 /* testViewController.swift */; };
+		6662970C21AB751B00472C66 /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6662970B21AB751B00472C66 /* Eureka.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		0AD06FD42182090200779C85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AD06FD6218213DD00779C85 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0AD06FD921825D2F00779C85 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		6662970921AB687200472C66 /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		6662970B21AB751B00472C66 /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = Carthage/Build/iOS/Eureka.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				0A34A8562182B4F300B43AEB /* Siesta.framework in Frameworks */,
 				0AC0FA352187D7970038FDEA /* SiestaUI.framework in Frameworks */,
 				0A34A85B2184B9AD00B43AEB /* SkyFloatingLabelTextField.framework in Frameworks */,
+				6662970C21AB751B00472C66 /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +141,7 @@
 		0A34A8542182B4F200B43AEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6662970B21AB751B00472C66 /* Eureka.framework */,
 				0AC0FA342187D7970038FDEA /* SiestaUI.framework */,
 				0A34A85A2184B9AD00B43AEB /* SkyFloatingLabelTextField.framework */,
 				0A34A8552182B4F300B43AEB /* Siesta.framework */,
@@ -159,6 +165,7 @@
 			children = (
 				0A34A8662186A35F00B43AEB /* TransactionListVC.swift */,
 				0AC0FA362188ACD20038FDEA /* NewTransactionVC.swift */,
+				6662970921AB687200472C66 /* testViewController.swift */,
 			);
 			path = Trans;
 			sourceTree = "<group>";
@@ -399,6 +406,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Siesta.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SkyFloatingLabelTextField.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SiestaUI.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Eureka.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -407,6 +415,7 @@
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Siesta.framework",
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SkyFloatingLabelTextField.framework",
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SiestaUI.framework",
+				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Eureka.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -437,6 +446,7 @@
 				0AD06FD22181F5E800779C85 /* Constants.swift in Sources */,
 				0A34A8622186944B00B43AEB /* TransactionCell.swift in Sources */,
 				0AC0FA372188ACD20038FDEA /* NewTransactionVC.swift in Sources */,
+				6662970A21AB687200472C66 /* testViewController.swift in Sources */,
 				0A34A84F218286C900B43AEB /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,7 +623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RCYCDAZ682;
+				DEVELOPMENT_TEAM = PVDQ4BPLQ3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -635,7 +645,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RCYCDAZ682;
+				DEVELOPMENT_TEAM = PVDQ4BPLQ3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

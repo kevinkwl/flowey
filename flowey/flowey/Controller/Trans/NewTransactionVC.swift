@@ -112,10 +112,14 @@ class NewTransactionVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             return
         }
         let category = self.pickerView.selectedRow(inComponent: 0)
-        var tranDict: [String: Any] = ["amount" : amount,
+        let tranDict: [String: Any] = ["amount" : amount,
                         "date" : date,
                         "category" : category,
                         "currency" : "usd"]
+        print("tranDict is:")
+        print(tranDict)
+        print(type(of: date))
+        // ["date": "2018-11-26", "category": 0, "currency": "usd", "amount": 233]
         FloweyAPI.addNewTransaction(tranDict, onSuccess: {
                 print("successfully add new transaction!")
                 self.navigationController?.popToRootViewController(animated: true)
