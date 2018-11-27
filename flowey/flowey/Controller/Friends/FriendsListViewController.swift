@@ -89,6 +89,20 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
     }
     // MARK: - Navigation
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            let user_to_delete = self.friends[editActionsForRowAt.row].user_id
+            self.friends.remove(at: editActionsForRowAt.row)
+            FloweyAPI.removeFriend(user_to_delete, onSuccess: {
+                print("success")
+            }, onFailure: { (error) in
+                print("failed to reject request \(error)")
+            })
+        }
+        delete.backgroundColor = Colorify.Alizarin
+        return [delete]
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.

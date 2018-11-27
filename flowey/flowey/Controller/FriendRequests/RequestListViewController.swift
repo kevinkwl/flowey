@@ -62,7 +62,7 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let reject = UITableViewRowAction(style: .destructive, title: "Reject") { action, index in
-            let from_user = self.requests[editActionsForRowAt.row].id
+            let from_user = self.requests[editActionsForRowAt.row].user_id
             self.requests.remove(at: editActionsForRowAt.row)
             FloweyAPI.rejectFriendRequest(from_user, onSuccess: {
                 print("success")
@@ -77,7 +77,7 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
     
     func accept(cell: FriendRequestCell) {
         if let indexPath = requestTableView.indexPath(for: cell) {
-            let from_user = self.requests[indexPath.row].id
+            let from_user = self.requests[indexPath.row].user_id
             self.requests.remove(at: indexPath.row)
             FloweyAPI.agreeFriendRequest(from_user, onSuccess: {
                 print("success")
