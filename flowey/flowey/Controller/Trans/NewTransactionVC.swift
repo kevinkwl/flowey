@@ -186,7 +186,7 @@ class MyFormViewController: FormViewController, ResourceObserver {
             tranDict["split_with"] = split_with
         }
         if let obj_user = pushRow?.value {
-            tranDict["objects_user_id"] = obj_user.user_id
+            tranDict["object_user_id"] = obj_user.user_id
         }
         print("tranDict is:")
         print(tranDict)

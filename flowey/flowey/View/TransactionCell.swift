@@ -21,7 +21,7 @@ class TransactionCell: UITableViewCell {
             categoryImageView.image = transactionCategoryIcon[cid]
             categoryLabelView.text = categories[cid]
             dateLabelView.text = transaction?.date
-            if categories[cid] == "Borrowing" {
+            if categories[cid] == "Borrow" || categories[cid] == "Receive" {
                 amountLabelView.textColor = Colorify.Nephritis
                 amountLabelView.text = "+ \(transaction?.amount ?? 0)"
             } else {
