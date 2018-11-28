@@ -23,7 +23,12 @@ struct Constants {
     }
 }
 
-let categoryDict: [String: Int] = ["Food & Dining":0, "Travel":1, "Lend":2, "Borrow":3, "Return":4, "MISC":5, "Return":6, "Receive":7]
+let categoryDict: [String: Int] = ["Food & Dining":0, "Travel":1, "Lend":2, "Borrow":3, "MISC":4, "Return":5, "Receive":6]
 let categories: [String] = ["Food & Dining", "Travel", "Lend", "Borrow", "MISC", "Return", "Receive"]
+let categories_for_creation = ["Food & Dining", "Travel", "Lend", "Borrow", "MISC", "Return"]
 let transactionCategoryIcon: [UIImage] = [#imageLiteral(resourceName: "food_dining"), #imageLiteral(resourceName: "travel"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "misc")]
 let transactionCategoryBC: [UIColor] = [Colorify.Lime, Colorify.Clouds, Colorify.Sunflower, Colorify.Cyan, Colorify.Yellow]
+
+func is_flow(_ category: String) -> Bool {
+    return category == "Lend" || category == "Borrow" || category == "Return" || category == "Receive"
+}
