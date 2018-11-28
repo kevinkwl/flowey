@@ -151,22 +151,22 @@ class Transaction(db.Model):
         return {c.name: json_serial(getattr(self, c.name)) for c
                 in self.__table__.columns}
 
-    def get_borrow_trans(self, borrower_id):
+    def get_borrow_trans(self, borrower_id, borrow_from_id):
         borrow = Transaction(self.amount, self.currency, Category.BORROW,
-                             self.date, self.last_modified, self.user_id,
-                             object_user_id=borrower_id)
+                             self.date, self.last_modified, borrower_id,
+                             object_user_id=borrow_from_id)
         return borrow
 
-    def get_lend_trans(self, lender_id):
+    def get_lend_trans(self, lender_id, lend_to_id):
         lend = Transaction(self.amount, self.currency, Category.LEND,
                            self.date, self.last_modified, lender_id,
-                           object_user_id=self.user_id)
+                           object_user_id=lend_to_id)
         return lend
 
-    def get_receive_trans(self, receiver_id):
+    def get_receive_trans(self, receiver_id, receive_from_id):
         receive = Transaction(self.amount, self.currency, Category.RECEIVE,
                               self.date, self.last_modified, receiver_id,
-                              object_user_id=self.user_id)
+                              object_user_id=receive_from_id)
         return receive
 
     @staticmethod
@@ -177,11 +177,11 @@ class Transaction(db.Model):
                         user_id, object_user_id)
         trans.append(t)
         if Category.is_borrow(category):
-            trans.append(t.get_lend_trans(object_user_id))
+            trans.append(t.get_lend_trans(object_user_id, user_id))
         elif Category.is_lend(category):
-            trans.append(t.get_borrow_trans(object_user_id))
+            trans.append(t.get_borrow_trans(object_user_id, user_id))
         elif Category.is_return(category):
-            trans.append(t.get_receive_trans(object_user_id))
+            trans.append(t.get_receive_trans(object_user_id, user_id))
         return trans
 
 

@@ -79,11 +79,12 @@ class AllTransactions(Resource):
                     db.session.commit()
 
                     # B borrow from user
-                    db.session.add(mytrans.get_borrow_trans(user_id))
+                    db.session.add(mytrans.get_borrow_trans(splitter_id,
+                    user_id))
                     db.session.commit()
 
                     # user lend to B
-                    db.session.add(mytrans.get_lend_trans(user_id))
+                    db.session.add(mytrans.get_lend_trans(user_id, splitter_id))
                     db.session.commit()
 
                     remaining -= myshare
