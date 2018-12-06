@@ -22,7 +22,7 @@ class AllTransactions(Resource):
                         help='transaction category')
     parser.add_argument('date', type=str, required=True,
                         help='transaction date')
-    parser.add_argument('object_user_id', type=int, help='lend/borrow/return')
+    parser.add_argument('object_user_id', type=int, help='lend/borrow/return', default=None)
     parser.add_argument('split_with', type=int, help='split bill',
                         action='append', default=None)
 
@@ -47,7 +47,7 @@ class AllTransactions(Resource):
 
         # Flow -> Borrow, Lend, or Return money, multiple transactions
         if Category.is_flow(category):
-            if 'object_user_id' not in args:
+            if args['object_user_id'] is None:
                 return {"message": "object user id not found."}, 400
             object_user_id = args['object_user_id']
 
