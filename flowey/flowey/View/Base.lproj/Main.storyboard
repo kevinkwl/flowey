@@ -687,7 +687,7 @@
         <scene sceneID="4JJ-xw-IdW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2oW-Wg-umY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" id="0VO-0m-ylC"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friendsTabIcon" id="0VO-0m-ylC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mc2-xK-T2P">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -706,7 +706,7 @@
         <scene sceneID="ET4-Vk-arm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d6A-D6-MIz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notification" id="bEp-y8-Xpg"/>
+                    <tabBarItem key="tabBarItem" title="Notification" image="notificationTabIcon" id="bEp-y8-Xpg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cdN-ti-uLr">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -724,6 +724,8 @@
     </scenes>
     <resources>
         <image name="food_dining" width="100" height="100"/>
+        <image name="friendsTabIcon" width="50" height="50"/>
+        <image name="notificationTabIcon" width="50" height="50"/>
         <image name="transactionTabIcon" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
