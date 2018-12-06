@@ -14,7 +14,57 @@ def login(test):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token']}
+    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    return header
+
+
+def login2(test):
+    test.client.post('/auth/register', data={
+        "email": "finn@columbia.edu",
+        "username": "real_finn",
+        "password": "123"
+    })
+
+    response = test.client.post('/auth/login', data={
+        'email': 'finn@columbia.edu',
+        'password': '123'
+    }, follow_redirects=True)
+
+    d = json.loads(response.get_data(as_text=True))
+    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    return header
+
+def login3(test):
+    test.client.post('/auth/register', data={
+        "email": "alex@columbia.edu",
+        "username": "real_alex",
+        "password": "123"
+    })
+
+    response = test.client.post('/auth/login', data={
+        'email': 'alex@columbia.edu',
+        'password': '123'
+    }, follow_redirects=True)
+
+    d = json.loads(response.get_data(as_text=True))
+    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    return header
+
+
+def login4(test):
+    test.client.post('/auth/register', data={
+        "email": "blake@columbia.edu",
+        "username": "real_finn",
+        "password": "123"
+    })
+
+    response = test.client.post('/auth/login', data={
+        'email': 'blake@columbia.edu',
+        'password': '123'
+    }, follow_redirects=True)
+
+    d = json.loads(response.get_data(as_text=True))
+    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
     return header
 
 
