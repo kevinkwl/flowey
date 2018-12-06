@@ -16,13 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //let hasLogin = UserDefaults.standard.bool(forKey: Constants.hasLoginKey)
-//        if hasLogin {
-//            let sb = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = sb.instantiateViewController(withIdentifier: Constants.StoryboardID.MainID)
-//            window?.rootViewController = vc
-//            window?.makeKeyAndVisible()
-//        }
+//        let hasLogin = UserDefaults.standard.bool(forKey: Constants.hasLoginKey)
+        let hasLogin = false
+        if hasLogin {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: Constants.StoryboardID.MainID)
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        }
         return true
     }
 
