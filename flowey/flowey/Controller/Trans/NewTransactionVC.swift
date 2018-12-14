@@ -55,6 +55,11 @@ class MyFormViewController: FormViewController, ResourceObserver {
         }
     }
     
+    var splitNum = Int(1)
+    var amount = Int(0)
+    var splitAmount = Int(0)
+    var splitAmountString = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +79,23 @@ class MyFormViewController: FormViewController, ResourceObserver {
                 formatter.locale = .current
                 formatter.numberStyle = .currency
                 $0.formatter = formatter
+                
+                $0.onChange{ row in
+                    let decimalRow: DecimalRow? = self.form.rowBy(tag: "Amount")
+                    let double_amount = (decimalRow!.value ?? 0) * 100
+                    self.amount = Int(double_amount)
+                    self.splitAmount = self.amount / self.splitNum
+                    
+                    if let textrow = self.form.rowBy(tag: "split_amount") as? TextRow {
+                        if String(self.splitAmount%100).count == 1 {
+                            textrow.value = "Splited Amount is: " + String(self.splitAmount/100) + ".0" + String(self.splitAmount%100)
+                        } else {
+                            textrow.value = "Splited Amount is: " + String(self.splitAmount/100) + "." + String(self.splitAmount%100)
+                        }
+                        // print(self.splitAmount)
+                        textrow.updateCell()
+                    }
+                }
             }
             
             <<< DateRow() {
@@ -92,7 +114,7 @@ class MyFormViewController: FormViewController, ResourceObserver {
                 .onPresent { from, to in
                     to.popoverPresentationController?.permittedArrowDirections = .up
             }
-            
+    
             
             +++ Section()
             
@@ -140,10 +162,45 @@ class MyFormViewController: FormViewController, ResourceObserver {
                     let row: RowOf<Bool>! = form.rowBy(tag: "Split bill with friends")
                     let actionSheetRow: ActionSheetRow<String>? = form.rowBy(tag: "Category")
                     let category_string = actionSheetRow!.value! // string
-                    return row.value ?? false == false ||
-                        is_flow((category_string))
+                    return row.value ?? false == false || is_flow((category_string))
+                })
+                $0.onChange { row in
+                    //self.splitAmount = String((row.value?.count ?? 0) + 1)
+                    self.splitNum = (row.value?.count ?? 0) + 1
+                    self.splitAmount = self.amount / self.splitNum
+                    
+                    if let textrow = self.form.rowBy(tag: "split_amount") as? TextRow {
+                        if String(self.splitAmount%100).count == 1 {
+                            textrow.value = "Splited Amount is: " + String(self.splitAmount/100) + ".0" + String(self.splitAmount%100)
+                        } else {
+                            textrow.value = "Splited Amount is: " + String(self.splitAmount/100) + "." + String(self.splitAmount%100)
+                        }
+                        // print(self.splitAmount)
+                        textrow.updateCell()
+                    }
+                }
+            }
+        
+            <<< TextRow() {
+                $0.tag = "split_amount"
+                $0.value = splitAmountString
+                $0.disabled = true
+                
+                $0.hidden = .function(["Split bill with friends", "Category", "Split"], { form -> Bool in
+                    // let row: RowOf<Bool>! = form.rowBy(tag: "Split bill with friends")
+                    // let actionSheetRow: ActionSheetRow<String>? = form.rowBy(tag: "Category")
+                    // let category_string = actionSheetRow!.value! // string
+                    // print(self.splitNum)
+                    if self.splitNum == 1 {
+                        return true
+                    }
+                    if let row = form.rowBy(tag: "Split") as? MultipleSelectorRow<Friend> {
+                        return row.isHidden
+                    }
+                    return true
                 })
             }
+
     }
     
     

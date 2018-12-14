@@ -490,7 +490,7 @@
             </objects>
             <point key="canvasLocation" x="4874.3999999999996" y="524.8875562218891"/>
         </scene>
-        <!--Title-->
+        <!--New Transaction-->
         <scene sceneID="hdg-vn-XOy">
             <objects>
                 <viewController id="2ee-SA-e29" customClass="MyFormViewController" customModule="flowey" customModuleProvider="target" sceneMemberID="viewController">
@@ -500,7 +500,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6G5-Kf-M18"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="bMz-Ie-1hN">
+                    <navigationItem key="navigationItem" title="New Transaction" id="bMz-Ie-1hN">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="eW5-PM-yrI">
                             <connections>
                                 <action selector="DoneButton:" destination="2ee-SA-e29" id="lU0-Vv-dw4"/>
@@ -726,7 +726,7 @@
         <image name="food_dining" width="100" height="100"/>
         <image name="friendsTabIcon" width="50" height="50"/>
         <image name="notificationTabIcon" width="50" height="50"/>
-        <image name="transactionTabIcon" width="24" height="24"/>
+        <image name="transactionTabIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pG3-WW-TZh"/>
