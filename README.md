@@ -1,6 +1,8 @@
 # Read Me
 
-Flowey is an iOS spending tracker with highlights on bill splits among friends. Flowey eases the process of calculating receivables and payables and checking each debt's purpose by introducing the convenient bill split and cancelling out receivables and payables in a timely fashion.s
+Flowey is an iOS spending tracker with highlights on bill splits among friends.
+
+Flowey eases the process of calculating receivables and payables and checking each debt's purpose by introducing the convenient bill split and cancelling out receivables and payables in a timely fashion.
 
 ## How to build
 
@@ -41,6 +43,7 @@ Initialize the database of server:
 
 ```bash
 flask db init
+flask db migrate
 ```
 
 Start server:
@@ -83,6 +86,8 @@ flask console
 ```
 
 or sending URIs to the server via regular browsers or API development environments like [POSTMAN](https://www.getpostman.com/).
+
+File [`test.sh`](./test.sh) in the root dir is for continuous integration tests. It uses `pylint` to find potential bugs and possibly violations of design conventions, unit tests for `flask` app are also executed in the `sh`. The output of the tests are located in `test-reports` branch.
 
 ### Test the iOS app
 
