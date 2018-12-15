@@ -1,0 +1,24 @@
+Flowey
+
+Team: duckduckrush
+Kangwei Ling kl3076
+Zefeng Liu zl2715
+Kunyan Han kh2931
+Xi Yang xy2390
+
+1.
+Github Repo: https://github.com/kevinkwl/flowey
+
+2.
+pre-commit hook:
+git-hook/hook-setup.sh setup the hook (sym link the pre-commit)
+git-hook/pre-commit the pre-commit hook
+
+post-commit hook:
+.travis.yml post-commit ci with travis ci
+
+3.
+post-commit CI will push all test reports to the test-reports branch.
+in the test-reports branch:
+pylint_result.txt result of the style checker / bugfinder
+test_with_coverage.txt result of unit testing with coverage
