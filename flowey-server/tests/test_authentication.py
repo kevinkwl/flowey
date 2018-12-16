@@ -52,7 +52,7 @@ class FlaskAuthenticationTestCase(unittest.TestCase):
         self.assertTrue('real_kevin' in response.get_data(
             as_text=True))
         d = json.loads(response.get_data(as_text=True))
-        header = {'authorization': ' Bearer ' + d['jwt_token']}
+        header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token']}
         return header
 
     def test_log_in_with_wrong_password(self):

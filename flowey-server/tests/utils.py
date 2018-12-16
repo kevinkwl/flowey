@@ -14,7 +14,7 @@ def login(test):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
     return header
 
 
@@ -31,7 +31,7 @@ def login2(test):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
     return header
 
 def login3(test):
@@ -47,7 +47,7 @@ def login3(test):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
     return header
 
 
@@ -64,7 +64,7 @@ def login4(test):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
+    header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token'], 'userid': d['user']['id']}
     return header
 
 
@@ -81,5 +81,5 @@ def auth(test, email, username):
     }, follow_redirects=True)
 
     d = json.loads(response.get_data(as_text=True))
-    header = {'authorization': ' Bearer ' + d['jwt_token']}
+    header = {'JWT-TOKEN': ' Bearer ' + d['jwt_token']}
     return header
