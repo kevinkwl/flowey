@@ -31,7 +31,7 @@ class AllTransactions(Resource):
         user_id = get_jwt_identity()
         data = [d.as_dict()
                 for d in Transaction.query.filter_by(user_id=user_id)
-                .order_by(Transaction.date.desc()).all()]
+                .order_by(Transaction.date.desc(), Transaction.last_modified.desc()).all()]
         return data, 200
 
     @jwt_required
