@@ -14,12 +14,14 @@ class FlowsListViewController: UIViewController {
     
     var transListVC: TransactionListVC?
     var trans: [Transaction] = []
+    var listFor: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         // transactionsResource = FloweyAPI.transactions
+        self.title = listFor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +38,8 @@ class FlowsListViewController: UIViewController {
         if segue.identifier == "embedFlowListViewController" {
             transListVC = segue.destination as? TransactionListVC
             transListVC?.transactions = trans
+            transListVC?.isShowFriendFlows = true
+            transListVC?.navigationItem.title = listFor
         }
     }
 }

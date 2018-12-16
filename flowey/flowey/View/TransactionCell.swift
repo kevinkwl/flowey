@@ -35,6 +35,7 @@ class TransactionCell: UITableViewCell {
                 }
                 
                 objectUserLabelView.text = transaction?.object_user_name ?? "other people"
+                amountLabelView.textColor = Colorify.Steel
             } else {
                 objectUserView.isHidden = true
                 

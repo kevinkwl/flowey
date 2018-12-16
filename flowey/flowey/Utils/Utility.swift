@@ -58,3 +58,27 @@ func is_flow_out(_ category: String) -> Bool {
 func is_flow_out(_ cid: Int) -> Bool {
     return is_flow_out(categories[cid])
 }
+
+func get_flow_text(_ flow: Int) -> String {
+    if flow > 0 {
+        return "You are owed"
+    } else if flow < 0 {
+        return "You owe"
+    } else {
+        return "All clear"
+    }
+}
+
+func get_flow_color(_ flow: Int) -> UIColor {
+    if flow > 0 {
+        return Colorify.Nephritis
+    } else if flow < 0 {
+        return Colorify.Grenadine
+    } else {
+        return Colorify.Steel
+    }
+}
+
+func get_flow_display_set(_ flow: Int) -> (String, UIColor) {
+    return (get_flow_text(flow), get_flow_color(flow))
+}

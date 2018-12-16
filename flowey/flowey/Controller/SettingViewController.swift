@@ -10,16 +10,30 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
+    @IBOutlet weak var logoutButtonView: UIButton!
+    @IBOutlet weak var icons8: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        logoutButtonView.cornerRadius = logoutButtonView.bounds.height / 2
+        logoutButtonView.backgroundColor = Colorify.Alizarin
+        logoutButtonView.setTitleColor(UIColor.white, for: .normal)
+        
+        icons8.text = """
+        Icons provided by
+        Icons8 https://icons8.com
+        """
     }
     
 
     @IBAction func logout(_ sender: UIButton) {
         UserDefaults.standard.set(false, forKey: Constants.hasLoginKey)
-        performSegue(withIdentifier: "logout", sender: self)
+        FloweyAPI.logout(onSuccess: { [weak self] () in
+            self?.performSegue(withIdentifier: "logout", sender: self)
+            }, onFailure: { (error) in
+                print(error)
+        })
     }
     /*
     // MARK: - Navigation

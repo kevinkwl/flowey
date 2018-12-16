@@ -10,10 +10,10 @@ import UIKit
 
 class TransactionListVC: UITableViewController {
 
+    @IBOutlet weak var descriptionLabelView: UILabel!
     @IBOutlet weak var totalLabelView: UILabel!
     var transactions: [Transaction] = [] {
         didSet {
-            tableView.reloadData()
 
             groupedTrans = Dictionary(grouping: transactions, by: { $0.date })
         }
@@ -33,12 +33,30 @@ class TransactionListVC: UITableViewController {
         var total = 0
         for (_, trans) in groupedTrans {
             for t in trans {
-                print("\(t) amount = \(t.expense_amount())")
-                total += t.expense_amount()
+                if !isShowFriendFlows {
+                    total += t.expense_amount()
+                } else {
+                    total += t.flow_amount()
+                }
             }
         }
-        print("new total \(total)")
-        totalLabelView.text = getMoneyStr(money: total)
+        if !isShowFriendFlows {
+            totalLabelView.text = getMoneyStr(money: total)
+        } else {
+            print("flow ===== \(total)")
+            totalLabelView.text = getMoneyStr(money: abs(total))
+            
+            let (text, color) = get_flow_display_set(total)
+            totalLabelView.textColor = color
+            descriptionLabelView.text = text
+        }
+    }
+    
+    // are we display trans with one friend ?  show flows
+    var isShowFriendFlows = false {
+        didSet {
+            updateSpendTotal()
+        }
     }
     
     override func viewDidLoad() {
@@ -62,6 +80,13 @@ class TransactionListVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
 //        cell.transaction = transactions[indexPath.row]
         cell.transaction = groupedTrans[dates[indexPath.section]]![indexPath.row]
+        
+        // if showing friends
+        if isShowFriendFlows {
+            assert(is_flow(cell.transaction?.category ?? 0))
+            cell.amountLabelView.textColor = get_flow_color(cell.transaction?.flow_amount() ?? 0)
+        }
+        
         return cell
     }
     
@@ -71,6 +96,12 @@ class TransactionListVC: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dates.count
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let dateGroup = dates[indexPath.section]
+        let transaction = groupedTrans[dateGroup]![indexPath.row]
+        return !is_flow(transaction.category)
     }
     
     // this method handles row deletion

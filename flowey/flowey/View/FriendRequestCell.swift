@@ -26,6 +26,8 @@ class FriendRequestCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        acceptButton.cornerRadius = acceptButton.bounds.height / 2
+        acceptButton.backgroundColor = Colorify.Emerald
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

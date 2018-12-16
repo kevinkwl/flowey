@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1A3A4A21C6AF8C00AD326D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3A4921C6AF8C00AD326D /* Extension.swift */; };
 		0A34A84F218286C900B43AEB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A84E218286C900B43AEB /* SettingViewController.swift */; };
 		0A34A8532182B21A00B43AEB /* FloweyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8522182B21A00B43AEB /* FloweyAPI.swift */; };
 		0A34A8562182B4F300B43AEB /* Siesta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A34A8552182B4F300B43AEB /* Siesta.framework */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1A3A4921C6AF8C00AD326D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0A34A84E218286C900B43AEB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0A34A8522182B21A00B43AEB /* FloweyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloweyAPI.swift; sourceTree = "<group>"; };
 		0A34A8552182B4F300B43AEB /* Siesta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Siesta.framework; path = Carthage/Build/iOS/Siesta.framework; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				0AC0FA2E2187A3F60038FDEA /* CircleImageView.swift */,
 				0AC0FA382188BF4C0038FDEA /* PickerTextField.swift */,
+				0A1A3A4921C6AF8C00AD326D /* Extension.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */,
 				0AC0FA332187B1DD0038FDEA /* FakeData.swift in Sources */,
 				1C878B1121AD11D1001B0E2D /* RequestListViewController.swift in Sources */,
+				0A1A3A4A21C6AF8C00AD326D /* Extension.swift in Sources */,
 				1C878B1321AD1671001B0E2D /* UserRequestsViewController.swift in Sources */,
 				0A34A8692187470200B43AEB /* Transaction.swift in Sources */,
 				1C878AF321AB6FF9001B0E2D /* UserFriendsViewController.swift in Sources */,

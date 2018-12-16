@@ -34,6 +34,7 @@ struct Transaction: Codable {
         return amount
     }
     
+    // borrow, receive = flow in = you owe
     func flow_amount() -> Int {
         if categories[category] == "Borrow"  || categories[category] == "Receive" {
             return -1 * amount
