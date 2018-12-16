@@ -148,8 +148,14 @@ class Transaction(db.Model):
                          in self.__table__.columns])
 
     def as_dict(self):
-        return {c.name: json_serial(getattr(self, c.name)) for c
+        td = {c.name: json_serial(getattr(self, c.name)) for c
                 in self.__table__.columns}
+        if self.object_user_id is not None:
+            object_user = User.query.filter_by(id=self.object_user_id).first()
+            if object_user is not None:
+                td["object_user_name"] = object_user.username
+        return td
+
 
     def get_borrow_trans(self, borrower_id, borrow_from_id):
         borrow = Transaction(self.amount, self.currency, Category.BORROW,

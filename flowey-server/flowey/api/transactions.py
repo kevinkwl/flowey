@@ -1,5 +1,5 @@
 from flask_restplus import Namespace, Resource, reqparse
-from flowey.models import Transaction
+from flowey.models import Transaction, User
 from flowey.ext import db, jwt
 from flowey.utils import Category
 from flask_jwt_extended import (get_jwt_identity, get_raw_jwt, jwt_required)
@@ -29,9 +29,9 @@ class AllTransactions(Resource):
     @jwt_required
     def get(self):
         user_id = get_jwt_identity()
-        data = [d.as_dict()
-                for d in Transaction.query.filter_by(user_id=user_id)
-                .order_by(Transaction.date.desc(), Transaction.last_modified.desc()).all()]
+        trans = Transaction.query.filter_by(user_id=user_id).order_by(Transaction.date.desc(), Transaction.last_modified.desc()).all()
+
+        data = [t.as_dict() for t in trans]
         return data, 200
 
     @jwt_required
