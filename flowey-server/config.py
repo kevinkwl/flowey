@@ -9,6 +9,7 @@ class Config:
     JWT_SECRET_KEY = SECRET_KEY
     JWT_BLACKLIST_ENABLED = True
     JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    JWT_HEADER_NAME = 'JWT-TOKEN'
 
     @staticmethod
     def init_app(app):
