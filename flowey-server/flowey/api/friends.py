@@ -27,6 +27,7 @@ class ListFriends(Resource):
                                                 object_user_id=friend.id).all()
             finfo['flows'] = [trans.as_dict() for trans in related_trans]
             results.append(finfo)
+        results = sorted(results, key=lambda fi: fi['username'])
         return results, 200
 
 
