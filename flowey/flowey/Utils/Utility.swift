@@ -35,3 +35,26 @@ func enableButton(_ btn: UIButton) {
     btn.backgroundColor = FloweyTheme.ButtonColor.activebg
     btn.isEnabled = true
 }
+
+func getMoneyStr(money: Int) -> String {
+    let dollars = String(money / 100)
+    let cents = String(format: "%02d", arguments: [money % 100])
+    return "$\(dollars).\(cents)"
+}
+
+
+func is_flow(_ category: String) -> Bool {
+    return category == "Lend" || category == "Borrow" || category == "Return" || category == "Receive"
+}
+
+func is_flow(_ cid: Int) -> Bool {
+    return is_flow(categories[cid])
+}
+
+func is_flow_out(_ category: String) -> Bool {
+    return category == "Lend" || category == "Return"
+}
+
+func is_flow_out(_ cid: Int) -> Bool {
+    return is_flow_out(categories[cid])
+}

@@ -101,6 +101,8 @@ class MyFormViewController: FormViewController, ResourceObserver {
             <<< DateRow() {
                 $0.tag = "Date"
                 $0.title = "Date"
+                $0.minimumDate = Date(timeIntervalSince1970: 0)
+                $0.maximumDate = Date(timeIntervalSinceNow: 0)
                 $0.value = Date();
             }
         

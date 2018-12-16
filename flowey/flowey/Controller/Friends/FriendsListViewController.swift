@@ -18,6 +18,11 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
         }
     }
     
+    @IBOutlet weak var oweLabelView: UILabel!
+    @IBOutlet weak var areOweLabelView: UILabel!
+    
+    
+
     var statusOverlay = ResourceStatusOverlay()
     
     override func viewDidLoad() {
@@ -43,7 +48,11 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
         for flow in friends[indexPath.row].flows {
             totalFlow += flow.flow_amount()
         }
-        cell.flowLabelView.text = String(totalFlow)
+        
+        if totalFlow > 0 {
+            
+        }
+        cell.flowLabelView.text = getMoneyStr(money: abs(totalFlow))
         return cell
     }
     

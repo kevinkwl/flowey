@@ -14,13 +14,31 @@ class TransactionListVC: UITableViewController {
     var transactions: [Transaction] = [] {
         didSet {
             tableView.reloadData()
-            
-            var total = 0
-            for t in transactions {
-                total += t.real_amount()
-            }
-            totalLabelView.text = String(total)
+
+            groupedTrans = Dictionary(grouping: transactions, by: { $0.date })
         }
+    }
+    
+    var groupedTrans: [String: [Transaction]] = [:] {
+        didSet {
+            dates = groupedTrans.keys.sorted().reversed()
+            tableView.reloadData()
+            updateSpendTotal()
+        }
+    }
+    
+    var dates: [String] = []
+    
+    func updateSpendTotal() {
+        var total = 0
+        for (_, trans) in groupedTrans {
+            for t in trans {
+                print("\(t) amount = \(t.expense_amount())")
+                total += t.expense_amount()
+            }
+        }
+        print("new total \(total)")
+        totalLabelView.text = getMoneyStr(money: total)
     }
     
     override func viewDidLoad() {
@@ -30,7 +48,7 @@ class TransactionListVC: UITableViewController {
     
     // table view delegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        return groupedTrans[dates[section]]!.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,7 +60,8 @@ class TransactionListVC: UITableViewController {
 //        }
 //
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
-        cell.transaction = transactions[indexPath.row]
+//        cell.transaction = transactions[indexPath.row]
+        cell.transaction = groupedTrans[dates[indexPath.section]]![indexPath.row]
         return cell
     }
     
@@ -51,7 +70,7 @@ class TransactionListVC: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return dates.count
     }
     
     // this method handles row deletion
@@ -60,15 +79,25 @@ class TransactionListVC: UITableViewController {
         if editingStyle == .delete {
             // remove the item from the data model
             // delete the table view row
-            print("before \(transactions.count)")
-            let tid = transactions[indexPath.row].transaction_id
-            transactions.remove(at: indexPath.row)
+//            let tid = transactions[indexPath.row].transaction_id
+//            transactions.remove(at: indexPath.row)
+            let dateGroup = dates[indexPath.section]
+            let transaction = groupedTrans[dateGroup]![indexPath.row]
+            let tid = transaction.transaction_id
+            groupedTrans[dateGroup]!.remove(at: indexPath.row)
+            if groupedTrans[dateGroup]!.count == 0 {
+                // must first remove from dates
+                dates.remove(at: indexPath.section)
+                groupedTrans.removeValue(forKey: dateGroup)
+            }
+            
+
             FloweyAPI.deleteTransaction(tid, onSuccess: {
                 print("success")
+                
             }, onFailure: { (error) in
                 print("failed to delete transaction \(error)")
             })
-            print(transactions.count)
             //tableView.deleteRows(at: [indexPath], with: .fade)
             
         } else if editingStyle == .insert {
@@ -76,5 +105,14 @@ class TransactionListVC: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dates[section]
+    }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as? UITableViewHeaderFooterView
+        header?.textLabel?.font = UIFont(name: "Futura", size: 12) // change it according to ur requirement
+        header?.textLabel?.textColor = UIColor.darkGray // change it according to ur requirement
+    }
+        
 }

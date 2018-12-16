@@ -12,23 +12,34 @@ class TransactionCell: UITableViewCell {
 
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var categoryLabelView: UILabel!
-    @IBOutlet weak var dateLabelView: UILabel!
     @IBOutlet weak var amountLabelView: UILabel!
-
+    
+    @IBOutlet weak var objectUserView: UIView!
+    @IBOutlet weak var objectRelationLabelView: UILabel!
+    @IBOutlet weak var objectUserLabelView: UILabel!
+    
     var transaction: Transaction? {
         didSet {
             let cid = transaction?.category ?? categories.count - 1
             categoryImageView.image = transactionCategoryIcon[cid]
             categoryLabelView.text = categories[cid]
-            dateLabelView.text = transaction?.date
-            if categories[cid] == "Borrow" || categories[cid] == "Receive" {
-                amountLabelView.textColor = Colorify.Nephritis
-                amountLabelView.text = "+ \(transaction?.amount ?? 0)"
+            amountLabelView.text = getMoneyStr(money: transaction?.amount ?? 0)
+            
+            if is_flow(cid) {
+                objectUserView.isHidden = false
+                
+                if is_flow_out(cid) {
+                    objectRelationLabelView.text = "to"
+                } else {
+                    objectRelationLabelView.text = "from"
+                }
+                
+                objectUserLabelView.text = transaction?.object_user_name ?? "other people"
             } else {
-                amountLabelView.textColor = Colorify.DeepOrange
-                amountLabelView.text = "- \(transaction?.amount ?? 0)"
+                objectUserView.isHidden = true
+                
+                amountLabelView.textColor = Colorify.Grenadine
             }
-            self.contentView.backgroundColor = transactionCategoryBC[cid]
         }
     }
     override func awakeFromNib() {
