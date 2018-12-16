@@ -258,7 +258,8 @@ class FlaskTransactionTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('{"transaction_id": 3, "amount": 60, "currency": "CNY", "category": 5, '
                         '"date": "2018-10-29"' in response.get_data(as_text=True))
-        self.assertTrue('"user_id": 1, "object_user_id": 2}' in response.get_data(as_text=True))
+        self.assertTrue('"user_id": 1, "object_user_id": 2' in response.get_data(as_text=True))
+
 
         return header1, header2
 
