@@ -31,9 +31,12 @@ class TransactionListVC: UITableViewController {
     
     func updateSpendTotal() {
         var total = 0
-        for (_, trans) in groupedTrans {
+        for (dateStr, trans) in groupedTrans {
             for t in trans {
                 if !isShowFriendFlows {
+                    if !dateStr.starts(with: currentMonthStr) {
+                        break
+                    }
                     total += t.expense_amount()
                 } else {
                     total += t.flow_amount()

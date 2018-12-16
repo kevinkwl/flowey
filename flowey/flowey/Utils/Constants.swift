@@ -23,8 +23,10 @@ struct Constants {
     }
 }
 
-let categoryDict: [String: Int] = ["Food & Dining":0, "Travel":1, "Lend":2, "Borrow":3, "Other":4, "Return":5, "Receive":6]
-let categories: [String] = ["Food & Dining", "Travel", "Lend", "Borrow", "Other", "Return", "Receive"]
-let categories_for_creation = ["Food & Dining", "Travel", "Lend", "Borrow", "Other", "Return"]
+let categoryDict: [String: Int] = ["Food & Drinks":0, "Travel":1, "Lend":2, "Borrow":3, "Others":4, "Return":5, "Receive":6]
+let categories: [String] = ["Food & Drinks", "Travel", "Lend", "Borrow", "Others", "Return", "Receive"]
+let categories_for_creation = ["Food & Drinks", "Travel", "Lend", "Borrow", "Others", "Return"]
 let transactionCategoryIcon: [UIImage] = [#imageLiteral(resourceName: "food_dining"), #imageLiteral(resourceName: "travel"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "misc"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow")]
 let transactionCategoryBC: [UIColor] = [Colorify.Lime, Colorify.Clouds, Colorify.Sunflower, Colorify.Cyan, Colorify.Yellow, Colorify.Sunflower, Colorify.Sunflower]
+
+let currentMonthStr = get_this_month_date()

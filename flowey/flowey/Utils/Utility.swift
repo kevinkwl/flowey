@@ -82,3 +82,11 @@ func get_flow_color(_ flow: Int) -> UIColor {
 func get_flow_display_set(_ flow: Int) -> (String, UIColor) {
     return (get_flow_text(flow), get_flow_color(flow))
 }
+
+// "2018-12"
+func get_this_month_date() -> String {
+    let now = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM"
+    return dateFormatter.string(from: now)
+}
