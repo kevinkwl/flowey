@@ -29,11 +29,12 @@ class SettingViewController: UIViewController {
 
     @IBAction func logout(_ sender: UIButton) {
         UserDefaults.standard.set(false, forKey: Constants.hasLoginKey)
-        FloweyAPI.logout(onSuccess: { [weak self] () in
-            self?.performSegue(withIdentifier: "logout", sender: self)
+        FloweyAPI.logout(onSuccess: { () in
+            
             }, onFailure: { (error) in
                 print(error)
         })
+        performSegue(withIdentifier: "logout", sender: self)
     }
     /*
     // MARK: - Navigation

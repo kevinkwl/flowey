@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct Constants {
-    static let APIBaseURL = "http://192.168.1.34:5000"
-    
+    static let APIBaseURL = "http://flowey-env.gq7mnxjnp8.us-east-2.elasticbeanstalk.com/"
+//    static let APIBaseURL = "http://192.168.1.34:5000"
     static let JWT_Token_Key = "jwt_token"
     
     static let hasLoginKey = "isLogin"

@@ -21,7 +21,7 @@ class _FloweyAPI: Service {
         //SiestaLog.Category.enabled = .all
         
         configure("**", description: "jwt token") {
-            $0.headers["Authorization"] = " Bearer \(self.authToken ?? "")" // use FakeToken here to bypass auth
+            $0.headers["JWT-TOKEN"] = " Bearer \(self.authToken ?? "")" // use FakeToken here to bypass auth
         }
         
         let jsonDecoder = JSONDecoder()
