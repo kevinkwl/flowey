@@ -887,9 +887,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tpW-yg-W13"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j8f-kB-aiF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="m9C-rC-OKH"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="j8f-kB-aiF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUg-JR-NNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -904,7 +902,7 @@
         <image name="transactionTabIcon" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jJf-Mt-WHY"/>
+        <segue reference="C3T-Iw-gbX"/>
         <segue reference="pG3-WW-TZh"/>
     </inferredMetricsTieBreakers>
 </document>

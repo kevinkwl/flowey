@@ -30,7 +30,7 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         requestsResource = FloweyAPI.friend_requests
-        self.title = "Friend Requests"
+        self.navigationItem.title = "Friend Requests"
     }
 
     // MARK: - Table view data source
