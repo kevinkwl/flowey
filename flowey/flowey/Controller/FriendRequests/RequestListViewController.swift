@@ -30,6 +30,7 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         requestsResource = FloweyAPI.friend_requests
+        self.navigationItem.title = "Friend Requests"
     }
 
     // MARK: - Table view data source
@@ -39,7 +40,6 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(requests.count)
         return requests.count
     }
 
@@ -136,7 +136,6 @@ class RequestListViewController: UIViewController, ResourceObserver, UITableView
         //
         // If there were a type mismatch, typedContent() would return nil. (We could also provide a default value with
         // the ifNone: param.)
-        print(requestsResource?.typedContent() ?? "empty")
         self.requests = requestsResource?.typedContent() ?? []
     }
     

@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct Constants {
-    static let APIBaseURL = "http://127.0.0.1:5000"
-    
+    static let APIBaseURL = "http://flowey-env.gq7mnxjnp8.us-east-2.elasticbeanstalk.com/"
+//    static let APIBaseURL = "http://192.168.1.34:5000"
     static let JWT_Token_Key = "jwt_token"
     
     static let hasLoginKey = "isLogin"
@@ -23,12 +23,10 @@ struct Constants {
     }
 }
 
-let categoryDict: [String: Int] = ["Food & Dining":0, "Travel":1, "Lend":2, "Borrow":3, "MISC":4, "Return":5, "Receive":6]
-let categories: [String] = ["Food & Dining", "Travel", "Lend", "Borrow", "MISC", "Return", "Receive"]
-let categories_for_creation = ["Food & Dining", "Travel", "Lend", "Borrow", "MISC", "Return"]
+let categoryDict: [String: Int] = ["Food & Drinks":0, "Travel":1, "Lend":2, "Borrow":3, "Others":4, "Return":5, "Receive":6]
+let categories: [String] = ["Food & Drinks", "Travel", "Lend", "Borrow", "Others", "Return", "Receive"]
+let categories_for_creation = ["Food & Drinks", "Travel", "Lend", "Borrow", "Others", "Return"]
 let transactionCategoryIcon: [UIImage] = [#imageLiteral(resourceName: "food_dining"), #imageLiteral(resourceName: "travel"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "misc"), #imageLiteral(resourceName: "lend_borrow"), #imageLiteral(resourceName: "lend_borrow")]
 let transactionCategoryBC: [UIColor] = [Colorify.Lime, Colorify.Clouds, Colorify.Sunflower, Colorify.Cyan, Colorify.Yellow, Colorify.Sunflower, Colorify.Sunflower]
 
-func is_flow(_ category: String) -> Bool {
-    return category == "Lend" || category == "Borrow" || category == "Return" || category == "Receive"
-}
+let currentMonthStr = get_this_month_date()

@@ -14,20 +14,50 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
     
     var friends: [Friend] = [] {
         didSet {
+            updateFlows()
             tableView.reloadData()
         }
     }
     
+    var friendsFlows: [Int: Int] = [:]
+    
+    @IBOutlet weak var oweLabelView: UILabel!
+    @IBOutlet weak var areOweLabelView: UILabel!
+    
+    
+
     var statusOverlay = ResourceStatusOverlay()
+
+    func updateFlows() {
+        var flow_in = 0
+        var flow_out = 0
+        for friend in friends {
+            let fid = friend.user_id
+            var flow = 0
+            for t in friend.flows {
+                flow += t.flow_amount()
+            }
+            friendsFlows[fid] = flow
+            
+            if flow > 0 {
+                flow_out += flow
+            } else {
+                flow_in += abs(flow)
+            }
+        }
+        
+        oweLabelView.text = getMoneyStr(money: flow_in)
+        areOweLabelView.text = getMoneyStr(money: flow_out)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         friendsResource = FloweyAPI.friends
-        // mock data
-//        friends.append(Friendship(username: "Alice", flow: [1.0, 2.0, 3.0]))
-//        friends.append(Friendship(username: "Bob", flow: [2.0, -3.0]))
+        
+        oweLabelView.textColor = Colorify.Grenadine
+        areOweLabelView.textColor = Colorify.Nephritis
     }
     
     // table view delegate
@@ -39,11 +69,17 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendCell
         cell.usernameLabelView.text = friends[indexPath.row].username
-        var totalFlow = 0
-        for flow in friends[indexPath.row].flows {
-            totalFlow += flow.flow_amount()
+        let flow = friendsFlows[friends[indexPath.row].user_id] ?? 0
+        
+        if flow > 0 {
+            cell.flowLabelView.textColor = Colorify.Nephritis
+        } else if flow < 0 {
+            cell.flowLabelView.textColor = Colorify.Grenadine
+        } else {
+            cell.flowLabelView.textColor = Colorify.Steel
         }
-        cell.flowLabelView.text = String(totalFlow)
+        
+        cell.flowLabelView.text = getMoneyStr(money: abs(flow))
         return cell
     }
     
@@ -78,7 +114,6 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
         //
         // If there were a type mismatch, typedContent() would return nil. (We could also provide a default value with
         // the ifNone: param.)
-        print(friendsResource?.typedContent() ?? "empty")
         self.friends = friendsResource?.typedContent() ?? []
     }
     
@@ -102,10 +137,30 @@ class FriendsListViewController: UITableViewController, ResourceObserver {
         delete.backgroundColor = Colorify.Alizarin
         return [delete]
     }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "flows"
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as? UITableViewHeaderFooterView
+        header?.textLabel?.font = UIFont(name: "Futura", size: 13) // change it according to ur requirement
+        header?.textLabel?.textColor = UIColor.darkGray // change it according to ur requirement
+        header?.textLabel?.textAlignment = .center
+    }
+    
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let fvc = segue.destination as? FlowsListViewController {
+            if let idx = tableView.indexPathForSelectedRow {
+                fvc.trans = friends[idx.row].flows
+                fvc.listFor = friends[idx.row].username
+            }
+        }
     }
+    
+    
 }

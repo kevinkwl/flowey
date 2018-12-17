@@ -11,7 +11,7 @@ import Siesta
 import SiestaUI
 
 class UserTransactionVC: UIViewController, ResourceObserver {
-
+    
     var transListVC: TransactionListVC?
     
     var statusOverlay = ResourceStatusOverlay()
@@ -39,7 +39,6 @@ class UserTransactionVC: UIViewController, ResourceObserver {
         //
         // If there were a type mismatch, typedContent() would return nil. (We could also provide a default value with
         // the ifNone: param.)
-        print(transactionsResource?.typedContent() ?? "empty")
         transListVC?.transactions = transactionsResource?.typedContent() ?? []
     }
     

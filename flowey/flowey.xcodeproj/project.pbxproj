@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1A3A4A21C6AF8C00AD326D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1A3A4921C6AF8C00AD326D /* Extension.swift */; };
 		0A34A84F218286C900B43AEB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A84E218286C900B43AEB /* SettingViewController.swift */; };
 		0A34A8532182B21A00B43AEB /* FloweyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A34A8522182B21A00B43AEB /* FloweyAPI.swift */; };
 		0A34A8562182B4F300B43AEB /* Siesta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A34A8552182B4F300B43AEB /* Siesta.framework */; };
@@ -33,6 +34,7 @@
 		0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD42182090200779C85 /* LoginViewController.swift */; };
 		0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD6218213DD00779C85 /* RegisterViewController.swift */; };
 		0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD06FD921825D2F00779C85 /* MainTabViewController.swift */; };
+		1C26CE9C21C212E0005A92A8 /* FlowsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C26CE9B21C212E0005A92A8 /* FlowsListViewController.swift */; };
 		1C878AF321AB6FF9001B0E2D /* UserFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AF221AB6FF9001B0E2D /* UserFriendsViewController.swift */; };
 		1C878AF721AB779D001B0E2D /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878AF621AB779D001B0E2D /* FriendCell.swift */; };
 		1C878B0721ACFB62001B0E2D /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C878B0521ACFB62001B0E2D /* FriendsListViewController.swift */; };
@@ -64,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1A3A4921C6AF8C00AD326D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0A34A84E218286C900B43AEB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		0A34A8522182B21A00B43AEB /* FloweyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloweyAPI.swift; sourceTree = "<group>"; };
 		0A34A8552182B4F300B43AEB /* Siesta.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Siesta.framework; path = Carthage/Build/iOS/Siesta.framework; sourceTree = "<group>"; };
@@ -96,6 +99,7 @@
 		0AD06FD42182090200779C85 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0AD06FD6218213DD00779C85 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		0AD06FD921825D2F00779C85 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		1C26CE9B21C212E0005A92A8 /* FlowsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlowsListViewController.swift; path = flowey/Controller/Friends/FlowsListViewController.swift; sourceTree = SOURCE_ROOT; };
 		1C878AF221AB6FF9001B0E2D /* UserFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendsViewController.swift; sourceTree = "<group>"; };
 		1C878AF621AB779D001B0E2D /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		1C878B0521ACFB62001B0E2D /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsListViewController.swift; path = flowey/Controller/Friends/FriendsListViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -194,6 +198,7 @@
 			children = (
 				0AC0FA2E2187A3F60038FDEA /* CircleImageView.swift */,
 				0AC0FA382188BF4C0038FDEA /* PickerTextField.swift */,
+				0A1A3A4921C6AF8C00AD326D /* Extension.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 			children = (
 				1C878B0521ACFB62001B0E2D /* FriendsListViewController.swift */,
 				1C878B0621ACFB62001B0E2D /* NewFriendViewController.swift */,
+				1C26CE9B21C212E0005A92A8 /* FlowsListViewController.swift */,
 			);
 			name = Friends;
 			path = "New Group";
@@ -478,11 +484,13 @@
 				0A34A85D2184BC5200B43AEB /* ColorTheme.swift in Sources */,
 				0AD06FDA21825D2F00779C85 /* MainTabViewController.swift in Sources */,
 				0AD06FD52182090200779C85 /* LoginViewController.swift in Sources */,
+				1C26CE9C21C212E0005A92A8 /* FlowsListViewController.swift in Sources */,
 				0AC0FA2C2187772F0038FDEA /* UserTransactionVC.swift in Sources */,
 				0A34A8532182B21A00B43AEB /* FloweyAPI.swift in Sources */,
 				0AD06FD7218213DD00779C85 /* RegisterViewController.swift in Sources */,
 				0AC0FA332187B1DD0038FDEA /* FakeData.swift in Sources */,
 				1C878B1121AD11D1001B0E2D /* RequestListViewController.swift in Sources */,
+				0A1A3A4A21C6AF8C00AD326D /* Extension.swift in Sources */,
 				1C878B1321AD1671001B0E2D /* UserRequestsViewController.swift in Sources */,
 				0A34A8692187470200B43AEB /* Transaction.swift in Sources */,
 				1C878AF321AB6FF9001B0E2D /* UserFriendsViewController.swift in Sources */,
@@ -685,7 +693,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = duckduckrush.flowey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -707,7 +715,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = duckduckrush.flowey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

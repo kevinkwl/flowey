@@ -21,8 +21,7 @@ class _FloweyAPI: Service {
         //SiestaLog.Category.enabled = .all
         
         configure("**", description: "jwt token") {
-            $0.headers["Authorization"] = " Bearer \(self.authToken ?? "")" // use FakeToken here to bypass auth
-            print($0)
+            $0.headers["JWT-TOKEN"] = " Bearer \(self.authToken ?? "")" // use FakeToken here to bypass auth
         }
         
         let jsonDecoder = JSONDecoder()
@@ -72,33 +71,30 @@ class _FloweyAPI: Service {
             .onFailure { (error) in
                 onFailure(error.userMessage)
         }
-        
-//        self.resource("/transactions/a").request(.get)
-//            .onSuccess {
-//                entity in
-//                print(entity)
-//        }
-//            .onFailure {
-//                (error) in
-//                print(error.userMessage)
-//        }
     }
     
     func register(_ email: String, _ password: String, _ username: String, onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
         self.resource("/auth/register")
             .request(.post, json: ["email": email, "password": password, "username": username])
             .onSuccess { entity in
-//                guard let json: [String: String] = entity.typedContent() else {
-//                    onFailure("JSON parsing error")
-//                    return
-//                }
                 onSuccess()
             }
             .onFailure { (error) in
                 onFailure(error.userMessage)
             }
     }
-
+    
+    func logout(onSuccess: @escaping () -> Void, onFailure: @escaping (String) -> Void) {
+        self.resource("/auth/logout")
+            .request(.delete)
+            .onSuccess { entity in
+                onSuccess()
+            }
+            .onFailure { (error) in
+                onFailure(error.userMessage)
+        }
+    }
+    
     /*
      
         Transactions
