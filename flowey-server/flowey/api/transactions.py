@@ -68,8 +68,12 @@ class AllTransactions(Resource):
 
                 # TODO: implement custom share in the future
                 share = total_amount // n_split
+                rem_share = total_amount - n_split * share
                 for splitter_id in split_with:
                     myshare = share
+                    if rem_share > 0:
+                        myshare += 1
+                        rem_share -= 1
 
                     # B transaction
                     mytrans = Transaction(myshare, args['currency'],
