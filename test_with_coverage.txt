@@ -1,0 +1,42 @@
+test_debug (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_log_in (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_log_in_with_wrong_password (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_log_out (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_register (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_register_with_email_already_in_db (test_authentication.FlaskAuthenticationTestCase) ... ok
+test_basic_friends (test_friends.FriendsTestCase) ... ok
+test_make_friend (test_friends.FriendsTestCase) ... ok
+test_add_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_add_transaction_before_login (test_transaction.FlaskTransactionTestCase) ... ok
+test_borrow_money (test_transaction.FlaskTransactionTestCase) ... ok
+test_debug (test_transaction.FlaskTransactionTestCase) ... ok
+test_delete_one_non_exist_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_delete_one_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_lend_money (test_transaction.FlaskTransactionTestCase) ... ok
+test_lend_money_without_object (test_transaction.FlaskTransactionTestCase) ... ok
+test_return_money (test_transaction.FlaskTransactionTestCase) ... ok
+test_show_all_transactions (test_transaction.FlaskTransactionTestCase) ... ok
+test_show_all_transactions_before_login (test_transaction.FlaskTransactionTestCase) ... ok
+test_show_one_non_exist_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_show_one_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_split_money (test_transaction.FlaskTransactionTestCase) ... ok
+test_update_one_non_exist_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+test_update_one_transaction (test_transaction.FlaskTransactionTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 4.984s
+
+OK
+Coverage Summary:
+Name                         Stmts   Miss Branch BrPart  Cover
+--------------------------------------------------------------
+flowey/api/auth.py              47     26     14      0    44%
+flowey/api/friends.py           68     22     22      3    66%
+flowey/api/transactions.py     106     40     34      2    66%
+flowey/app.py                   16      6      0      0    62%
+flowey/ext.py                   13      8      0      0    38%
+flowey/models.py               126     60     40      7    54%
+flowey/utils.py                 35     26     18      4    25%
+--------------------------------------------------------------
+TOTAL                          411    188    128     16    55%
+HTML version: file:///home/travis/build/kevinkwl/flowey/flowey-server/../reports/coverage/index.html
